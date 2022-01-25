@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "394768017015",
+    "firebase_url": "https://assign4rafaelizarra-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "assign4rafaelizarra",
+    "storage_bucket": "assign4rafaelizarra.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394768017015:android:d2b73d77df159eb0f24872",
+        "android_client_info": {
+          "package_name": "com.example.sdaassign4_2021"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "394768017015-b3ap3qc98ab4n4lt4ann6bhvj1874o2i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sdaassign4_2021",
+            "certificate_hash": "c85175c02861401eecd3f14f163292160c0ab5ec"
+          }
+        },
+        {
+          "client_id": "394768017015-i3tpjpcesao56ascgevdq4o68j3estbi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6L1xVXww-RI3AGNtKhFeRgJpV680QJ0c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "394768017015-i3tpjpcesao56ascgevdq4o68j3estbi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
