@@ -10,23 +10,5 @@
     <string name="border">border item</string>
     <string name="check_out">Check Out</string>
     <string name="library">library</string>
-    <string name="inline_preferences">In-line preferences</string>
-    <string name="summary_checkbox_preference">This is a checkbox</string>
-    <string name="title_edittext_preference">Edit text preference</string>
-    <string name="summary_edittext_preference">An example that uses an edit text dialog</string>
-    <string name="dialog_title_edittext_preference">Enter your favorite animal</string>
-    <string name="title_list_preference">List preference</string>
-    <string name="summary_list_preference">An example that uses a list dialog</string>
-    <string name="dialog_title_list_preference">Choose one</string>
-    <string name="launch_preferences">Launch preferences</string>
-    <string name="title_intent_preference">Intent preference</string>
-    <string name="summary_intent_preference">Launches an Activity from an Intent</string>
-    <string name="preference_attributes">Preference attributes</string>
-    <string name="summary_parent_preference">This is visually a parent</string>
-    <string name="title_child_preference">Child checkbox preference</string>
-    <string name="summary_child_preference">This is visually a child</string>
-    <string name="title_parent_preference">Parent checkbox preference</string>
-    <string name="dialog_based_preferences">Dialog-based preferences</string>
-    <string name="title_checkbox_preference">Checkbox preference</string>
 
 </resources>

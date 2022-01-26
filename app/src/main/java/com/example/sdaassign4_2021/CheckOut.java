@@ -41,7 +41,6 @@ public class CheckOut extends AppCompatActivity {
     TextView mDisplaySummary, mBookAvailability;
     Button sendOrderButton, setDateButton;
     Calendar mDateAndTime = Calendar.getInstance();
-    FirebaseDatabase database;
     DocumentReference docRef;
     String title, bookID;
 
@@ -77,7 +76,7 @@ public class CheckOut extends AppCompatActivity {
     private void getdata(String bookID) {
         //Initialize db Firebase
         //dbRef = FirebaseFirestore.getInstance();
-        //Point the db to the collection and document required.
+        //Point a reference to the db with a collection and document required.
         docRef = dbRef.collection("books").document(bookID);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

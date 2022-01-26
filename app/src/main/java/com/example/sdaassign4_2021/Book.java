@@ -7,12 +7,14 @@ public class Book {
     private String bookAuthor;
     private String bookTitle;
     private String bookID;
+    private String bookURL;
 
 
-    public Book (String vBookAuthor, String vBookTitle, String bookId){
+    public Book (String vBookAuthor, String vBookTitle, String bookId, String url){
         this.bookAuthor = vBookAuthor;
         this.bookTitle = vBookTitle;
         this.bookID = bookId;
+        this.bookURL = url;
     }
 
     public Book(){
@@ -43,4 +45,5 @@ public class Book {
     public String getBookID(){ return bookID; }
     public String getBookAuthor(){ return bookAuthor; }
     public String getBookTitle(){ return bookTitle; }
+    public String getBookURL(){ return bookURL; }
 }

@@ -36,10 +36,13 @@ package com.example.sdaassign4_2021;
         import androidx.annotation.NonNull;
         import androidx.recyclerview.widget.RecyclerView;
 
+        import com.bumptech.glide.Glide;
         import com.google.firebase.storage.FirebaseStorage;
         import com.google.firebase.storage.StorageReference;
+        import com.squareup.picasso.Picasso;
 
         import java.util.ArrayList;
+        import java.util.List;
 
 /*
  * @author Chris Coughlan 2019
@@ -50,27 +53,11 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
     private static final String TAG = "RecyclerViewAdapter";
     private Context mNewContext;
     private ArrayList<Book>mBook;
-    private ArrayList<Bitmap>mImages;
-    public FirebaseStorage mStorage;
-    public StorageReference storageReference;
-    private StorageReference gsReference;
-    /*
-    //add array for each item\
-    private ArrayList<String> mAuthor;
-    private ArrayList<String> mTitle;
-    private ArrayList<Integer> mImageID;
 
-    LibraryViewAdapter(Context mNewContext, ArrayList<String> author, ArrayList<String> title, ArrayList<Integer> imageId) {
-        this.mNewContext = mNewContext;
-        this.mAuthor = author;
-        this.mTitle = title;
-        this.mImageID = imageId;
-    }
-*/
-    LibraryViewAdapter(Context mNewContext, ArrayList<Book> mbook, ArrayList<Bitmap>images) {
+
+    LibraryViewAdapter(Context mNewContext, ArrayList<Book> mbook) {
         this.mNewContext = mNewContext;
         this.mBook = mbook;
-        this.mImages = images;
     }
 
     //declare methods
@@ -84,17 +71,16 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
-        Log.d(TAG, "onBindViewHolder: was called");
+        Log.d(TAG, "onBindViewHolder: was called" + mBook.get(position).getBookURL());
 
-        // Glide.with(mNewContext).asBitmap().load(mImages.get(position)).into(viewHolder.imageItem);
-/*
-        viewHolder.authorText.setText(mAuthor.get(position));
-        viewHolder.titleText.setText(mTitle.get(position));
-        viewHolder.imageItem.setImageResource(mImageID.get(position));
-*/
+
         viewHolder.authorText.setText(mBook.get(position).getBookAuthor());
         viewHolder.titleText.setText(mBook.get(position).getBookTitle());
-        //viewHolder.imageItem.setImageBitmap(mImages.get(position));
+        //viewHolder.imageItem.setVisibility(View.VISIBLE);
+
+        Glide.with(viewHolder.imageItem.getContext()).load(mBook.get(position).getBookURL()).into(viewHolder.imageItem);
+        //Picasso.get().load(mBook.get(position).getBookURL()).into(viewHolder.imageItem);
+        //viewHolder.imageItem.setImageResource(mImages.get(position));
 
         //should check here to see if the book is available.
 
@@ -141,8 +127,6 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
             AlertDialog.Builder builder = new AlertDialog.Builder(mNewContext);
             builder.setTitle("Notification!").setMessage("Customer Name not set.").setPositiveButton("OK", null).show();
         } else {
-            //Toast.makeText(mNewContext, mTitle.get(position), Toast.LENGTH_SHORT).show();
-            //Toast.makeText(mNewContext, mBook.get(position).getBookTitle(), Toast.LENGTH_SHORT).show();
             //...
             Intent myOrder = new Intent(mNewContext, CheckOut.class);
             //get the title and send it to the checkout activity
