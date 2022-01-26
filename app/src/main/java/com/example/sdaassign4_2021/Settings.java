@@ -19,6 +19,9 @@ import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
+ * @author Edited by Rafael Izarra 2022
+ *
+ *
  */
 public class Settings extends Fragment {
 

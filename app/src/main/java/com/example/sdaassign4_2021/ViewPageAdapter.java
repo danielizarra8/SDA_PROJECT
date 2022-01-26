@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-/*
- * viewPager adapter.
+/**
  * @author Chris Coughlan 2019
+ * @author Edited by Rafael Izarra 2022
+ *
+ * A ViewAdapter class using RecycleView
  */
 public class ViewPageAdapter extends FragmentPagerAdapter {
 

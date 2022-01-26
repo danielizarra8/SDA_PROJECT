@@ -22,6 +22,7 @@ package com.example.sdaassign4_2021;
         import android.content.Intent;
         import android.content.SharedPreferences;
         import android.graphics.Bitmap;
+        import android.graphics.Color;
         import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
@@ -44,8 +45,9 @@ package com.example.sdaassign4_2021;
         import java.util.ArrayList;
         import java.util.List;
 
-/*
+/**
  * @author Chris Coughlan 2019
+ * @author Edited by Rafael Izarra 2022
  */
 public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.ViewHolder> {
     private static final String USER_NAME_KEY = "USER_NAME_KEY";
@@ -73,14 +75,24 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
         Log.d(TAG, "onBindViewHolder: was called" + mBook.get(position).getBookURL());
 
-
         viewHolder.authorText.setText(mBook.get(position).getBookAuthor());
         viewHolder.titleText.setText(mBook.get(position).getBookTitle());
-        //viewHolder.imageItem.setVisibility(View.VISIBLE);
+
+        /**  the following if statement checks the availability of the book and if the book is available(true)
+         * the text will be set "Available" and color "green"
+         *Otherwise, show "Out of stock" and "reed"
+         */
+
+        if (mBook.get(position).getAvailability() == true) {
+            viewHolder.availabilityText.setText("Available");
+            viewHolder.availabilityText.setTextColor(Color.parseColor("#2c8300"));
+        }else{
+            viewHolder.availabilityText.setText("Out of stock");
+
+            viewHolder.availabilityText.setTextColor(Color.parseColor("#e31300"));
+        }
 
         Glide.with(viewHolder.imageItem.getContext()).load(mBook.get(position).getBookURL()).into(viewHolder.imageItem);
-        //Picasso.get().load(mBook.get(position).getBookURL()).into(viewHolder.imageItem);
-        //viewHolder.imageItem.setImageResource(mImages.get(position));
 
         //should check here to see if the book is available.
 
@@ -103,6 +115,7 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
         ImageView imageItem;
         TextView authorText;
         TextView titleText;
+        TextView availabilityText;
         Button checkOut;
         RelativeLayout itemParentLayout;
 
@@ -113,6 +126,7 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
             imageItem = itemView.findViewById(R.id.bookImage);
             authorText = itemView.findViewById(R.id.authorText);
             titleText = itemView.findViewById(R.id.bookTitle);
+            availabilityText = itemView.findViewById(R.id.availabilityTextView);
             checkOut = itemView.findViewById(R.id.out_button);
             itemParentLayout = itemView.findViewById(R.id.listItemLayout);
 

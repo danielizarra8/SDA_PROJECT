@@ -1,10 +1,13 @@
 package com.example.sdaassign4_2021;
 
 import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.text.style.BackgroundColorSpan;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -34,6 +37,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Checkout class
+ * @author Edited by Rafael Izarra 2022
+ */
+
 public class CheckOut extends AppCompatActivity {
     String TAG1="Checkout";
     FirebaseFirestore dbRef = null;
@@ -48,8 +56,10 @@ public class CheckOut extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // set the content view  to activity check our xml
         setContentView(R.layout.activity_check_out);
 
+        //instantiate the widgets variables
         TextView mBookTitle = findViewById(R.id.confirm);
         mBookAvailability = findViewById(R.id.availability);
         sendOrderButton = findViewById(R.id.orderButton);
@@ -69,13 +79,12 @@ public class CheckOut extends AppCompatActivity {
         bookID = getIntent().getStringExtra("bookID");
         mBookTitle.setText(title);
 
+        //instantiate the firsetose database and get the data getData()
         dbRef = FirebaseFirestore.getInstance();
         getdata(bookID);
     }
 
     private void getdata(String bookID) {
-        //Initialize db Firebase
-        //dbRef = FirebaseFirestore.getInstance();
         //Point a reference to the db with a collection and document required.
         docRef = dbRef.collection("books").document(bookID);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -83,19 +92,20 @@ public class CheckOut extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     if (task.getResult().exists()) {
-                        Toast.makeText(CheckOut.this, "Sucessfull book!.", Toast.LENGTH_SHORT).show();
+                        //pass the data from task to dataSnapshop to get access to individual fields
                         DocumentSnapshot dataSnapshot = task.getResult();
                         String author = dataSnapshot.getString("Author");
                         String availability = String.valueOf(dataSnapshot.getBoolean("Availability"));
                         setAvailabilityView(availability);
-                        Log.i(TAG1, "data was retrieved!" + author);
+                        Toast.makeText(CheckOut.this, "Sucessfull book!.", Toast.LENGTH_SHORT).show();
+                        Log.i(TAG1, "data was retrieved succesfully!");
                     } else {
-                        Toast.makeText(CheckOut.this, "Book doesn't exist.", Toast.LENGTH_SHORT).show();
+                        Log.i(TAG1, "Book was not retrieved!");
 
                     }
 
                 } else {
-                    Toast.makeText(CheckOut.this, "Failed to get data.", Toast.LENGTH_SHORT).show();
+                    Log.i(TAG1, "Failed to get data!");
                 }
             }
         });
@@ -113,7 +123,7 @@ public class CheckOut extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //source SDA_2019 android course examples ViewGroup demo
+    //Taken from source SDA_2019 android course examples ViewGroup demo
     public void onDateClicked(View v) {
 
         DatePickerDialog.OnDateSetListener mDateListener = new DatePickerDialog.OnDateSetListener() {
@@ -134,16 +144,19 @@ public class CheckOut extends AppCompatActivity {
     }
 
     private void updateDateAndTimeDisplay() {
-        //date time year
+        //get the data and time from datepicker and save them as a string values
         CharSequence currentTime = DateUtils.formatDateTime(this, mDateAndTime.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
         CharSequence SelectedDate = DateUtils.formatDateTime(this, mDateAndTime.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_NUMERIC_DATE | DateUtils.FORMAT_SHOW_YEAR);
         String date = SelectedDate + ", " + currentTime;
-        String finalSummary =  /* date1 + " " + date2 + "   " + "\n" +  */
-                                "USER NAME: " + getIntent().getStringExtra("userName") + "\n" +
+        //update the field summary with all details
+        String finalSummary =   "USER NAME: " + getIntent().getStringExtra("userName") + "\n" +
                                 "USER ID: " + getIntent().getStringExtra("userID") + "\n" +
                                 "BOOK TILE: "+ title + " - BOOK ID: " + bookID + "\n" +
                                 "DATE: " + SelectedDate + " TIME: " + currentTime;
+        //set the summary text to the textview field
         mDisplaySummary.setText(finalSummary);
+        //we call the insertDB() method to insert the order date field to the database (books document)
+        //the addOrder creates a new collection "orders"
         sendOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,6 +168,7 @@ public class CheckOut extends AppCompatActivity {
     }
 
     private void addOrderDB() {
+        //create collection with required fields; currentdate,duedate,bookid and userid
         Map<String , Object>orderDates = new HashMap<>();
         Date currentDate  = mDateAndTime.getTime();
         mDateAndTime.add(Calendar.DAY_OF_MONTH,14);
@@ -168,14 +182,14 @@ public class CheckOut extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
             sendOrderButton.setEnabled(false);
-            Toast.makeText(CheckOut.this, "SUCESSFULL ORDER CREATED!.", Toast.LENGTH_SHORT).show();
             }
         });
-       // SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMddHHmmss");
+
 
     }
 
     private void setAvailabilityView(String availability){
+        // this method enables the button (send order and select date) if details in the setting tab were sucessfully entered.
         sendOrderButton.setEnabled(false);
         setDateButton.setEnabled(false);
         if (availability.equals("true")){
@@ -186,7 +200,9 @@ public class CheckOut extends AppCompatActivity {
             mBookAvailability.setText("Book is unavailable at the moment!");
         }
     }
+
     private void inserDateDB(String selectedDate){
+        //this method simply update the books document with a new field orderDate
         docRef = dbRef.collection("books").document("1");
         Map<String, Object>data = new HashMap<>();
         data.put("orderDate", selectedDate);

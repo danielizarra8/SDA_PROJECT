@@ -34,20 +34,22 @@ import java.util.ArrayList;
  * is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.
  * A simple {@link Fragment} subclass.
  * @author Chris Coughlan
+ * @author Edited by Rafael Izarra 2022
  */
 public class BookList extends Fragment {
-    private ArrayList<Book> mBook = new ArrayList<>();
-    private ArrayList<String>mImagesUrls = new ArrayList<>();
     private static final String TAG1 = "retrieveImg";
     private static final String TAG2 = "retrievebooks";
-    private static final String TAG3 = "retrieve";
-    StorageReference imageRef;
-    String u;
 
-    FirebaseStorage firebaseStorage;
+    //declare variables, database and widgets
+
+    private ArrayList<Book> mBook = new ArrayList<>();
+
+    StorageReference imageRef;
     StorageReference storageReference;
     LibraryViewAdapter recyclerViewAdapter;
+
     String author, title, id, url, url1;
+    boolean isAvailable;
 
     FirebaseFirestore dbRef;
 
@@ -62,6 +64,8 @@ public class BookList extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_book_list, container, false);
+
+        //instantiate the database and call the getBookData() method to retireve book's data
         dbRef = FirebaseFirestore.getInstance();
         getBookData();
 
@@ -76,48 +80,41 @@ public class BookList extends Fragment {
     }
 
     public void getBookData() {
+        // get the storage reference from firebase where images are stored
         storageReference = FirebaseStorage.getInstance().getReference();
 
+        //point to the right collection in the database
         dbRef.collection("books").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()) {
+                    //loop through each ducument retrieved
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         url = document.getString("url");
+                        // set the right path
                         imageRef = storageReference.child("/images/"+url);
+                        // download the image url
                         imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
+                                // pass the values and create a new Book object
                                 url1 = uri.toString();
                                 title = (String) (document.getString("Title"));
                                 author = (String) (document.getString("Author"));
+                                isAvailable = document.getBoolean("Availability");
                                 id = document.getId();
-                                mBook.add(new Book(author,title,id,url1));
+                                mBook.add(new Book(author,title,id,url1,isAvailable));
+                                // update the recyclerview adapater to reflect the changes, otherwise it won't display the data
                                 recyclerViewAdapter.notifyDataSetChanged();
                             }
                         });
 
-                    }
+                    } // end of loop
 
-                }
+                } // end of if statement
             }
         });
 
     }
-    public String getImageUri(String url){
-
-        imageRef = storageReference.child("/images/"+url);
-        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                u = uri.toString();
-                Log.i(TAG2,"URL SUCESSFULL" + uri.toString() );
-                Toast.makeText(getContext(), "URL SUCESSFULL!" + uri.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        return u;
-    }
-
 
 }

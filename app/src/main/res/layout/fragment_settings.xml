@@ -58,21 +58,25 @@
 
         <Button
             android:id="@+id/saveDetailsButton"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="40dp"
             android:text="Save Details"
+            android:textColor="@color/primaryText"
+            android:background="@drawable/custom_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/borrowerID" />
 
         <Button
             android:id="@+id/resetButton"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="16dp"
             android:text="RESET DETAILS"
+            android:textColor="@color/primaryText"
+            android:background="@drawable/custom_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/borrowerID" />
     </androidx.constraintlayout.widget.ConstraintLayout>

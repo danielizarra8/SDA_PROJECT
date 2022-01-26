@@ -7,8 +7,15 @@ import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 
-/*
- * @author Chris Coughlan 2019
+/**
+ * This class is the starting point of the project
+ * creates a new custom intent that broadcasts a vibration to a local BroadcastReceiver<br>
+ * when the user selects a button in it's associated UI.
+ * @author      @author Chris Coughlan 2019
+ * @author      Adapted by Rafael Izarra (rafael.izarra2@mail.dcu.ie)
+ * @version     1              <current version number of program>
+ * @since       2021-12-06          <the version of the package this class was first added to>
+ * @since       2022-01-26          last updated
  */
 public class MainActivity extends AppCompatActivity {
     public static final int BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT = 1;
