@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".Settings">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/welcome_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/earth"
+        >
+
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="244dp"
+            android:layout_marginEnd="32dp"
+            android:text="Logout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/changePwdBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="32dp"
+            android:text="Reset Password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logoutBtn" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:background="@color/tabTextColor"
+            android:ems="10"
+            android:textAlignment="center"
+            android:fontFamily="@font/aclonica"
+            android:hint="Full name"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:text="Your Profile"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nameProfile"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:background="@color/tabTextColor"
+            android:ems="10"
+            android:fontFamily="@font/aclonica"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.169"
+            app:layout_constraintStart_toStartOf="@id/profileIcon"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <TextView
+            android:id="@+id/emailProfile"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@color/tabTextColor"
+            android:ems="10"
+            android:fontFamily="@font/aclonica"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.169"
+            app:layout_constraintStart_toStartOf="@id/emailIcon"
+            app:layout_constraintTop_toBottomOf="@+id/nameProfile" />
+
+        <TextView
+            android:id="@+id/phoneProfile"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@color/tabTextColor"
+            android:ems="10"
+            android:fontFamily="@font/aclonica"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.169"
+            app:layout_constraintStart_toStartOf="@id/phoneIcon"
+            app:layout_constraintTop_toBottomOf="@+id/emailProfile" />
+
+        <TextView
+            android:id="@+id/addressProfile"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:background="@color/tabTextColor"
+            android:ems="10"
+            android:fontFamily="@font/aclonica"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.17"
+            app:layout_constraintStart_toStartOf="@id/addressIcon"
+            app:layout_constraintTop_toBottomOf="@+id/phoneProfile" />
+
+        <Button
+            android:id="@+id/verifyBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="168dp"
+            android:layout_marginTop="16dp"
+            android:text="Veify Email"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.254"
+            app:layout_constraintStart_toStartOf="@+id/verifyMessage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/verifyMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/fui_idp_button_background_github"
+            android:text="Unverified Email!"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_error"
+            android:textSize="18sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.135"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/profileIcon"
+            android:layout_width="26dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="132dp"
+            android:background="#000000"
+            android:backgroundTint="@color/listText"
+            android:src="@drawable/fui_ic_anonymous_white_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/phoneIcon"
+            android:layout_width="26dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="40dp"
+            android:background="#000000"
+            android:backgroundTint="@color/listText"
+            android:src="@drawable/fui_ic_phone_white_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailIcon" />
+
+        <ImageView
+            android:id="@+id/addressIcon"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="32dp"
+            android:background="#232323"
+            android:src="@android:drawable/ic_menu_myplaces"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phoneIcon" />
+
+        <ImageView
+            android:id="@+id/emailIcon"
+            android:layout_width="26dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="40dp"
+            android:background="#000000"
+            android:backgroundTint="#000000"
+            android:src="@android:drawable/ic_dialog_email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileIcon" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

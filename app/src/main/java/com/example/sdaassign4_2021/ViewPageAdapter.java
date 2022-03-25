@@ -71,7 +71,7 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
                 break;
             case 2:
                 //code
-                tabTitle = "BOOKS";
+                tabTitle = "PRODUCTS";
                 break;
             case 3:
                 //code

@@ -9,16 +9,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -42,7 +39,7 @@ public class BookList extends Fragment {
 
     //declare variables, database and widgets
 
-    private ArrayList<Book> mBook = new ArrayList<>();
+    private ArrayList<Item> mItem = new ArrayList<>();
 
     StorageReference imageRef;
     StorageReference storageReference;
@@ -71,7 +68,7 @@ public class BookList extends Fragment {
 
 
         RecyclerView recyclerView = root.findViewById(R.id.bookView_view);
-        recyclerViewAdapter = new LibraryViewAdapter(getContext(), mBook);
+        recyclerViewAdapter = new LibraryViewAdapter(getContext(), mItem);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -103,7 +100,7 @@ public class BookList extends Fragment {
                                 author = (String) (document.getString("Author"));
                                 isAvailable = document.getBoolean("Availability");
                                 id = document.getId();
-                                mBook.add(new Book(author,title,id,url1,isAvailable));
+                                mItem.add(new Item(author,title,id,url1,isAvailable));
                                 // update the recyclerview adapater to reflect the changes, otherwise it won't display the data
                                 recyclerViewAdapter.notifyDataSetChanged();
                             }

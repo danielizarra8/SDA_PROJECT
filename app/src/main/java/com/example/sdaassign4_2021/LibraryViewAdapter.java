@@ -16,34 +16,26 @@ package com.example.sdaassign4_2021;
          * limitations under the License.
          */
 
-        import android.app.Activity;
         import android.app.AlertDialog;
         import android.content.Context;
         import android.content.Intent;
         import android.content.SharedPreferences;
-        import android.graphics.Bitmap;
         import android.graphics.Color;
         import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.Button;
-        import android.widget.EditText;
         import android.widget.ImageView;
         import android.widget.RelativeLayout;
         import android.widget.TextView;
-        import android.widget.Toast;
 
         import androidx.annotation.NonNull;
         import androidx.recyclerview.widget.RecyclerView;
 
         import com.bumptech.glide.Glide;
-        import com.google.firebase.storage.FirebaseStorage;
-        import com.google.firebase.storage.StorageReference;
-        import com.squareup.picasso.Picasso;
 
         import java.util.ArrayList;
-        import java.util.List;
 
 /**
  * @author Chris Coughlan 2019
@@ -54,12 +46,12 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
     private static final String USER_ID_KEY = "USER_ID_KEY";
     private static final String TAG = "RecyclerViewAdapter";
     private Context mNewContext;
-    private ArrayList<Book>mBook;
+    private ArrayList<Item> mItem;
 
 
-    LibraryViewAdapter(Context mNewContext, ArrayList<Book> mbook) {
+    LibraryViewAdapter(Context mNewContext, ArrayList<Item> mbook) {
         this.mNewContext = mNewContext;
-        this.mBook = mbook;
+        this.mItem = mbook;
     }
 
     //declare methods
@@ -73,17 +65,17 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
-        Log.d(TAG, "onBindViewHolder: was called" + mBook.get(position).getBookURL());
+        Log.d(TAG, "onBindViewHolder: was called" + mItem.get(position).getBookURL());
 
-        viewHolder.authorText.setText(mBook.get(position).getBookAuthor());
-        viewHolder.titleText.setText(mBook.get(position).getBookTitle());
+        viewHolder.authorText.setText(mItem.get(position).getBookAuthor());
+        viewHolder.titleText.setText(mItem.get(position).getBookTitle());
 
         /**  the following if statement checks the availability of the book and if the book is available(true)
          * the text will be set "Available" and color "green"
          *Otherwise, show "Out of stock" and "reed"
          */
 
-        if (mBook.get(position).getAvailability() == true) {
+        if (mItem.get(position).getAvailability() == true) {
             viewHolder.availabilityText.setText("Available");
             viewHolder.availabilityText.setTextColor(Color.parseColor("#2c8300"));
         }else{
@@ -92,7 +84,7 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
             viewHolder.availabilityText.setTextColor(Color.parseColor("#e31300"));
         }
 
-        Glide.with(viewHolder.imageItem.getContext()).load(mBook.get(position).getBookURL()).into(viewHolder.imageItem);
+        Glide.with(viewHolder.imageItem.getContext()).load(mItem.get(position).getBookURL()).into(viewHolder.imageItem);
 
         //should check here to see if the book is available.
 
@@ -106,7 +98,7 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
 
     @Override
     public int getItemCount() {
-        return mBook.size();
+        return mItem.size();
     }
 
     //view holder class for recycler_list_item.xml
@@ -144,8 +136,8 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
             //...
             Intent myOrder = new Intent(mNewContext, CheckOut.class);
             //get the title and send it to the checkout activity
-            myOrder.putExtra("title",mBook.get(position).getBookTitle());
-            myOrder.putExtra("bookID",mBook.get(position).getBookID());
+            myOrder.putExtra("title", mItem.get(position).getBookTitle());
+            myOrder.putExtra("bookID", mItem.get(position).getBookID());
             myOrder.putExtra("userName",texUserName);
             myOrder.putExtra("userID",userID);
             mNewContext.startActivity(myOrder);

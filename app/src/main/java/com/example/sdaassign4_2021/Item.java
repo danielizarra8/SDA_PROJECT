@@ -1,13 +1,12 @@
 package com.example.sdaassign4_2021;
 
-import java.security.PublicKey;
 import java.util.Objects;
 /*
  * @author Created by Rafael Izarra 2022
  *
  * A ViewAdapter class using RecycleView
  */
-public class Book {
+public class Item {
     private String bookAuthor;
     private String bookTitle;
     private String bookID;
@@ -24,7 +23,7 @@ public class Book {
      *
      * */
 
-    public Book (String vBookAuthor, String vBookTitle, String vBookId, String url, boolean vAvailability){
+    public Item(String vBookAuthor, String vBookTitle, String vBookId, String url, boolean vAvailability){
         this.bookAuthor = vBookAuthor;
         this.bookTitle = vBookTitle;
         this.bookID = vBookId;
@@ -33,7 +32,7 @@ public class Book {
 
     }
 
-    public Book(){
+    public Item(){
 
     }
 
@@ -50,7 +49,7 @@ public class Book {
     // to check duplicate books in the list comparing by id
     @Override
     public boolean equals(Object o) {
-        return bookID.equals(((Book)o).bookID);
+        return bookID.equals(((Item)o).bookID);
     }
 
     @Override

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SDA Assign4_2021</string>
+    <string name="app_name">Macys</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -10,5 +10,6 @@
     <string name="border">border item</string>
     <string name="check_out">Check Out</string>
     <string name="library">library</string>
+    <string name="title">MACYS</string>
 
 </resources>

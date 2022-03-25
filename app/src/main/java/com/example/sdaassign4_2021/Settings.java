@@ -2,12 +2,16 @@ package com.example.sdaassign4_2021;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import android.util.Patterns;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +19,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 /**
@@ -25,12 +37,16 @@ import android.widget.Toast;
  */
 public class Settings extends Fragment {
 
+    private static final String TAG = "verifyUserMessage";
     private static final String USER_NAME_KEY = "USER_NAME_KEY";
-    private static final String USER_EMAIL_KEY = "USER_EMAIL_KEY";
-    private static final String USER_ID_KEY = "USER_ID_KEY";
-    public EditText mUserName, mUserEmail, mUserID;
-    Button resetDetailsButton;
 
+    TextView name, email, address, phone, verifyMessage;
+    Button mLogoutBtn, mVerifyBtn, mChangePwdBtn;
+    String userID;
+
+    FirebaseAuth fAuth;
+    FirebaseUser fUser;
+    FirebaseFirestore fStore;
 
     public Settings() {
         // Required empty public constructor
@@ -41,62 +57,148 @@ public class Settings extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final SharedPreferences prefs = getActivity().getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
+        //save name share preferences
+        final SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
+
         // Inflate the layout for this fragment
+        View root = inflater.inflate(R.layout.fragment_setting, container, false);
 
-        View root = inflater.inflate(R.layout.fragment_settings, container, false);
+        fAuth = FirebaseAuth.getInstance();
 
-        // User name
-        mUserName = (EditText) root.findViewById(R.id.userName);
-        mUserName.setText(prefs.getString(USER_NAME_KEY,""));
+        // display data if user is logged in otherwise display empty fields
+        if(fAuth.getCurrentUser() !=null) {
 
-        //User Email
-        mUserEmail = (EditText) root.findViewById(R.id.email);
-        mUserEmail.setText(String.valueOf(prefs.getString(USER_EMAIL_KEY, "")));
 
-        //User ID
-        mUserID = (EditText) root.findViewById(R.id.borrowerID);
-        mUserID.setText(prefs.getString(USER_ID_KEY, ""));
+            verifyMessage = root.findViewById(R.id.verifyMessage);
+            mVerifyBtn = root.findViewById(R.id.verifyBtn);
+            mChangePwdBtn = root.findViewById(R.id.changePwdBtn);
 
-        // Create a buttton and set an even listener to save detials locally in the share preferences
-        Button saveDetailsButton = root.findViewById(R.id.saveDetailsButton);
-        saveDetailsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String emailText = mUserEmail.getText().toString();
+            name = root.findViewById(R.id.nameProfile);
+            email = root.findViewById(R.id.emailProfile);
+            address = root.findViewById(R.id.addressProfile);
+            phone = root.findViewById(R.id.phoneProfile);
 
-                if (!emailText.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
-                    SharedPreferences.Editor editor = prefs.edit();
-                    editor.putString(USER_NAME_KEY, mUserName.getText().toString());
-                    editor.putString(USER_EMAIL_KEY, mUserEmail.getText().toString());
-                    editor.putString(USER_ID_KEY, mUserID.getText().toString());
-                    editor.apply();
-                    Toast.makeText(getActivity(), "Your details have been saved sucesfully!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), "Enter valid email address!", Toast.LENGTH_SHORT).show();
+            //Instancitate the firebase authenticate and database module
+            //fAuth = FirebaseAuth.getInstance();
+            fStore = FirebaseFirestore.getInstance();
+            //get current user to verify email.
+            fUser = fAuth.getCurrentUser();
+            //retrieve the current user id.
+            userID = fAuth.getCurrentUser().getUid();
+
+            //To display message depending user is has been verified through email.
+            if (!fUser.isEmailVerified()) {
+                verifyMessage.setVisibility(View.VISIBLE);
+                mVerifyBtn.setVisibility(View.VISIBLE);
+
+                mVerifyBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View view) {
+                        // if the user verify the email
+                        fUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(view.getContext(), "Verification email has been resent!", Toast.LENGTH_SHORT).show();
+                            }
+                            //if the user does not verify the email
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.i(TAG, "Failure to verify user's email address. Reason: " + e.getMessage());
+                            }
+                        });
+                    }
+                });
+            }
+
+            //retrieve data (phone,email,name) using DocumentReference from the firestore db associated with the user is.
+            DocumentReference documentReference = fStore.collection("users").document(userID);
+            documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    name.setText(documentSnapshot.getString("name"));
+                    email.setText(documentSnapshot.getString("email"));
+                    address.setText(documentSnapshot.getString("address"));
+                    phone.setText(documentSnapshot.getString("phone"));
+                    saveDetailsSharePreferences(documentSnapshot.getString("name"), prefs);
                 }
-            }
-        });
-        //Button to reset the users preferences
+            });
+        /*
 
-        resetDetailsButton = root.findViewById(R.id.resetButton);
-        resetDetailsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString(USER_NAME_KEY, "");
-                editor.putString(USER_EMAIL_KEY, "");
-                editor.putString(USER_ID_KEY, "");
-                editor.apply();
-                mUserName.setText(String.valueOf(prefs.getString(USER_NAME_KEY, "")));
-                mUserEmail.setText(String.valueOf(prefs.getString(USER_EMAIL_KEY, "")));
-                mUserID.setText(prefs.getString(USER_ID_KEY, ""));
-                Toast.makeText(getActivity(), "Your details have been reset!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        String text = "All Rights reserved by DCU";
+
+        // add a span color and underline to the "DCU's" word target
+        SpannableString spannableString = new SpannableString(text);
+        ForegroundColorSpan foregroundColorSpanCustom = new ForegroundColorSpan(Color.rgb(204, 174, 98));
+        UnderlineSpan underlineSpan = new UnderlineSpan();
+        spannableString.setSpan(foregroundColorSpanCustom, 23, 26, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(underlineSpan, 23, 26, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        textView.setText(spannableString);
+*/
+            //Reset the password button logic
+            mChangePwdBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final EditText resetPassword = new EditText(view.getContext());
+                    final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(view.getContext());
+                    passwordResetDialog.setTitle("Would like to rest your password?");
+                    passwordResetDialog.setMessage("Enter your new password");
+                    passwordResetDialog.setView(resetPassword);
+
+                    //here depending on the users' choice, (yes or no) both options are handled using the same alerdialog obj
+                    passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            // get the email and then send the reset link to the user and then let the user know if it was successful.
+                            String newPassword = resetPassword.getText().toString();
+                            fUser.updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(view.getContext(), "Password has been reset successfully",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(view.getContext(), "Sorry, password has not been reset!",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                    passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            // if clicked no, close the dialog and redirect user to the same page.
+                        }
+                    });
+                    //display the dialog
+                    passwordResetDialog.create().show();
+                }
+            });
+
+            //logout the user and redirect it to the login page
+            mLogoutBtn = root.findViewById(R.id.logoutBtn);
+            mLogoutBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    prefs.edit().clear().apply();
+                    FirebaseAuth.getInstance().signOut();
+                    startActivity(new Intent(getActivity(), Login.class));
+                }
+            });
+        }else{
+            Log.d(TAG,"Log in first");
+        }
 
         return root;
     }
 
+    private void saveDetailsSharePreferences(String name, SharedPreferences prefs) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(USER_NAME_KEY,name);
+        editor.apply();
+    }
 
 }
