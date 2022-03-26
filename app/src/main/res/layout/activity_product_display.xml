@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProductDisplay">
+
+
+    <ImageView
+        android:id="@+id/productImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/images_desc" />
+
+    <TextView
+        android:id="@+id/authorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/productImage"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/productImage"
+        android:text="@string/plc_author"
+        android:textAlignment="textStart"
+        android:textColor="@color/listText"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/bookTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/authorText"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@+id/productImage"
+        android:text="@string/plc_title"
+        android:textAlignment="center"
+        android:textColor="@color/listText"
+        android:textSize="17sp"
+        android:textStyle="italic" />
+
+    <Button
+        android:id="@+id/addProductBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/productImage"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:layout_toEndOf="@+id/addQtyBtn"
+        android:background="@drawable/custom_button"
+        android:text="@string/add_product"
+        android:textColor="@color/primaryText" />
+
+    <Button
+        android:id="@+id/checkoutBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lineSpacer"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="80dp"
+        android:background="@drawable/custom_input_design"
+        android:text="@string/check_out"
+        android:textColor="@color/primaryText"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/lineSpacer"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/addQtyBtn"
+        android:layout_marginTop="16dp"
+        android:background="@color/border_shade"
+        android:contentDescription="@string/border" />
+
+    <TextView
+        android:id="@+id/availabilityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bookTitle"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@+id/productImage"
+        android:text="TextView" />
+
+    <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+        android:id="@+id/addQtyBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/productImage"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="8dp"
+        android:elevation="6dp"
+        android:gravity="center"
+        app:finalNumber="15"
+        app:initialNumber="1">
+
+
+
+
+    </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+</RelativeLayout>

@@ -66,11 +66,12 @@ public class CheckOut extends AppCompatActivity {
         setDateButton = findViewById(R.id.date);
 
         //set the toolbar we have overridden
+        /*
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-
+*/
         //find the summary textview
         mDisplaySummary = findViewById(R.id.orderSummary);
 

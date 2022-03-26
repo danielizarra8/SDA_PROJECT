@@ -180,7 +180,7 @@
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="34dp"
             android:background="#232323"
             android:src="@android:drawable/ic_menu_myplaces"
             app:layout_constraintStart_toStartOf="parent"

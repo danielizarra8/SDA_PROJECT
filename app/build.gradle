@@ -38,6 +38,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation platform('com.google.firebase:firebase-bom:29.0.4')
     implementation 'com.google.firebase:firebase-analytics'
+    //cards
+    implementation "androidx.cardview:cardview:1.0.0"
+    //buttons/
+    implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
+    //materials
+    implementation 'com.google.android.material:material:1.1.0'
     //glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'

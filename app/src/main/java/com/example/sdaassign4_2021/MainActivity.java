@@ -26,15 +26,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //set the toolbar we have overridden
-        Toolbar toolbar = findViewById(R.id.toolbar);
+/*        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+*/
         viewPager = findViewById(R.id.pager);
         ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager(), BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, getApplicationContext());
         viewPager.setAdapter(adapter);
 
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_baseline_home_24);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_baseline_store_24);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_baseline_settings_24);
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_baseline_shopping_cart_24);
 
 
     }

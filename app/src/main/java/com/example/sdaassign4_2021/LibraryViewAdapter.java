@@ -134,8 +134,9 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
             builder.setTitle("Notification!").setMessage("Customer Name not set.").setPositiveButton("OK", null).show();
         } else {
             //...
-            Intent myOrder = new Intent(mNewContext, CheckOut.class);
+            Intent myOrder = new Intent(mNewContext, ProductDisplay.class);
             //get the title and send it to the checkout activity
+            myOrder.putExtra("imageURL", mItem.get(position).getBookURL());
             myOrder.putExtra("title", mItem.get(position).getBookTitle());
             myOrder.putExtra("bookID", mItem.get(position).getBookID());
             myOrder.putExtra("userName",texUserName);
