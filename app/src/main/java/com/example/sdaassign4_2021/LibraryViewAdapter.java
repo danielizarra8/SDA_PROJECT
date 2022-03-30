@@ -65,17 +65,17 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
-        Log.d(TAG, "onBindViewHolder: was called" + mItem.get(position).getBookURL());
+        Log.d(TAG, "onBindViewHolder: was called" + mItem.get(position).getProductURL());
 
-        viewHolder.authorText.setText(mItem.get(position).getBookAuthor());
-        viewHolder.titleText.setText(mItem.get(position).getBookTitle());
+        viewHolder.mProductNameText.setText(mItem.get(position).getProductName());
+        viewHolder.mPriceText.setText(String.valueOf(mItem.get(position).getProductPrice() + " $"));
 
         /**  the following if statement checks the availability of the book and if the book is available(true)
          * the text will be set "Available" and color "green"
          *Otherwise, show "Out of stock" and "reed"
          */
 
-        if (mItem.get(position).getAvailability() == true) {
+        if (mItem.get(position).getProductQuantity() > 0) {
             viewHolder.availabilityText.setText("Available");
             viewHolder.availabilityText.setTextColor(Color.parseColor("#2c8300"));
         }else{
@@ -84,7 +84,7 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
             viewHolder.availabilityText.setTextColor(Color.parseColor("#e31300"));
         }
 
-        Glide.with(viewHolder.imageItem.getContext()).load(mItem.get(position).getBookURL()).into(viewHolder.imageItem);
+        Glide.with(viewHolder.imageItem.getContext()).load(mItem.get(position).getProductURL()).into(viewHolder.imageItem);
 
         //should check here to see if the book is available.
 
@@ -105,8 +105,8 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
     class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView imageItem;
-        TextView authorText;
-        TextView titleText;
+        TextView mProductNameText;
+        TextView mPriceText;
         TextView availabilityText;
         Button checkOut;
         RelativeLayout itemParentLayout;
@@ -115,9 +115,9 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
             super(itemView);
 
             //grab the image, the text and the layout id's
-            imageItem = itemView.findViewById(R.id.bookImage);
-            authorText = itemView.findViewById(R.id.authorText);
-            titleText = itemView.findViewById(R.id.bookTitle);
+            imageItem = itemView.findViewById(R.id.productImage);
+            mProductNameText = itemView.findViewById(R.id.productNameTxt);
+            mPriceText = itemView.findViewById(R.id.productPriceTxt);
             availabilityText = itemView.findViewById(R.id.availabilityTextView);
             checkOut = itemView.findViewById(R.id.out_button);
             itemParentLayout = itemView.findViewById(R.id.listItemLayout);
@@ -134,14 +134,17 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
             builder.setTitle("Notification!").setMessage("Customer Name not set.").setPositiveButton("OK", null).show();
         } else {
             //...
-            Intent myOrder = new Intent(mNewContext, ProductDisplay.class);
+            Intent displaySingleProduct = new Intent(mNewContext, ProductDisplay.class);
             //get the title and send it to the checkout activity
-            myOrder.putExtra("imageURL", mItem.get(position).getBookURL());
-            myOrder.putExtra("title", mItem.get(position).getBookTitle());
-            myOrder.putExtra("bookID", mItem.get(position).getBookID());
-            myOrder.putExtra("userName",texUserName);
-            myOrder.putExtra("userID",userID);
-            mNewContext.startActivity(myOrder);
+            displaySingleProduct.putExtra("imageURL", mItem.get(position).getProductURL());
+            displaySingleProduct.putExtra("description", mItem.get(position).getProductDescription());
+            displaySingleProduct.putExtra("productName", mItem.get(position).getProductName());
+            displaySingleProduct.putExtra("productID", mItem.get(position).getProductID());
+            displaySingleProduct.putExtra("productPrice", String.valueOf(mItem.get(position).getProductPrice()));
+            displaySingleProduct.putExtra("productQty", String.valueOf(mItem.get(position).getProductQuantity()));
+            displaySingleProduct.putExtra("userName",texUserName);
+            displaySingleProduct.putExtra("userID",userID);
+            mNewContext.startActivity(displaySingleProduct);
         }
     }
 }

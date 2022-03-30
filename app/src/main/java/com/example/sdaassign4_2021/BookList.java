@@ -45,7 +45,13 @@ public class BookList extends Fragment {
     StorageReference storageReference;
     LibraryViewAdapter recyclerViewAdapter;
 
-    String author, title, id, url, url1;
+    String productName;
+    int productPrice;
+    String productDescription;
+    int productQty;
+    String id;
+    String url;
+    String url1;
     boolean isAvailable;
 
     FirebaseFirestore dbRef;
@@ -81,7 +87,7 @@ public class BookList extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference();
 
         //point to the right collection in the database
-        dbRef.collection("books").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        dbRef.collection("products").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()) {
@@ -94,13 +100,14 @@ public class BookList extends Fragment {
                         imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                // pass the values and create a new Book object
+                                // pass the values and create a new Product object
                                 url1 = uri.toString();
-                                title = (String) (document.getString("Title"));
-                                author = (String) (document.getString("Author"));
-                                isAvailable = document.getBoolean("Availability");
+                                productPrice =  document.getLong("price").intValue();
+                                productName = (String) (document.getString("name"));
+                                productDescription = (String) (document.getString("description"));
+                                productQty = document.getLong("quantity").intValue();
                                 id = document.getId();
-                                mItem.add(new Item(author,title,id,url1,isAvailable));
+                                mItem.add(new Item(productName, productPrice, productDescription, id, url1, productQty));
                                 // update the recyclerview adapater to reflect the changes, otherwise it won't display the data
                                 recyclerViewAdapter.notifyDataSetChanged();
                             }

@@ -5,33 +5,32 @@
     android:id="@+id/listItemLayout">
 
     <ImageView
-        android:id="@+id/bookImage"
+        android:id="@+id/productImage"
         android:layout_width="92dp"
         android:layout_height="129dp"
-        android:contentDescription="@string/images_desc"
-         />
+        android:contentDescription="@string/images_desc" />
 
     <TextView
-        android:id="@+id/authorText"
+        android:id="@+id/productNameTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/bookImage"
+        android:layout_alignTop="@+id/productImage"
         android:layout_marginStart="16dp"
         android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/bookImage"
+        android:layout_toEndOf="@+id/productImage"
         android:text="@string/plc_author"
         android:textAlignment="textStart"
         android:textColor="@color/listText"
         android:textSize="17sp" />
 
     <TextView
-        android:id="@+id/bookTitle"
+        android:id="@+id/productPriceTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/authorText"
+        android:layout_below="@+id/productNameTxt"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_toEndOf="@+id/bookImage"
+        android:layout_toEndOf="@+id/productImage"
         android:text="@string/plc_title"
         android:textAlignment="center"
         android:textColor="@color/listText"
@@ -42,7 +41,7 @@
         android:id="@+id/out_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bookTitle"
+        android:layout_below="@+id/productPriceTxt"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -63,10 +62,10 @@
         android:id="@+id/availabilityTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bookTitle"
+        android:layout_below="@+id/productPriceTxt"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_toEndOf="@+id/bookImage"
-        android:text="TextView" />
+        android:layout_toEndOf="@+id/productImage"
+        android:text="Availability" />
 
 </RelativeLayout>

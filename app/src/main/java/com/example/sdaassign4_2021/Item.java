@@ -7,28 +7,30 @@ import java.util.Objects;
  * A ViewAdapter class using RecycleView
  */
 public class Item {
-    private String bookAuthor;
-    private String bookTitle;
-    private String bookID;
-    private String bookURL;
-    private boolean availability;
+    private String productName;
+    private String productDescription;
+    private String productID;
+    private String productURL;
+    private int productQuantity;
+    private int productPrice;
 
     /**
-     * Create a new Book object.
-     * @param vBookAuthor is the name of the Book author (e.g. Agatta cristie)
-     * @param vBookTitle is the name of the book's title.
+     * Create a new Product object.
+     * @param vProductName is the name of the Book author (e.g. Agatta cristie)
+     * @param vProductPrice is the name of the book's title.
      * @param  vBookId is the id of the book (0, 1 ,10, etc)
-     * @param vAvailability is the availability state of the book (e.g. Available:true or false)
+     * @param vProductQty is the availability state of the book (e.g. Available:true or false)
      * @param url is the link that point to the reference of the book's image
      *
      * */
 
-    public Item(String vBookAuthor, String vBookTitle, String vBookId, String url, boolean vAvailability){
-        this.bookAuthor = vBookAuthor;
-        this.bookTitle = vBookTitle;
-        this.bookID = vBookId;
-        this.bookURL = url;
-        this.availability = vAvailability;
+    public Item(String vProductName, int vProductPrice, String vProductDescription, String vBookId, String url, int vProductQty){
+        this.productName = vProductName;
+        this.productPrice = vProductPrice;
+        this.productDescription = vProductDescription;
+        this.productID = vBookId;
+        this.productURL = url;
+        this.productQuantity = vProductQty;
 
     }
 
@@ -36,33 +38,34 @@ public class Item {
 
     }
 
-    public void setBookID(String vBookID){
-        this.bookID = vBookID;
+    public void setProductID(String vBookID){
+        this.productID = vBookID;
     }
-    public void setBookAuthor(String author){
-        this.bookAuthor = author;
+    public void setProductName(String author){
+        this.productName = author;
     }
 
-    public void setBookTitle(String title) {
-        this.bookTitle = title;
+    public void setProductDescription(String title) {
+        this.productDescription = title;
     }
     // to check duplicate books in the list comparing by id
     @Override
     public boolean equals(Object o) {
-        return bookID.equals(((Item)o).bookID);
+        return productID.equals(((Item)o).productID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookAuthor, bookTitle, bookID);
+        return Objects.hash(productName, productDescription, productID);
     }
 
     /**
-     *Get the bookd id, author, title, url and availability state of the selected book
+     *Get the product id, author, title, url and availability state of the selected book
      */
-    public String getBookID(){ return bookID; }
-    public String getBookAuthor(){ return bookAuthor; }
-    public String getBookTitle(){ return bookTitle; }
-    public String getBookURL(){ return bookURL; }
-    public boolean getAvailability(){ return availability; }
+    public String getProductID(){ return productID; }
+    public String getProductName(){ return productName; }
+    public String getProductDescription(){ return productDescription; }
+    public String getProductURL(){ return productURL; }
+    public int getProductQuantity(){ return productQuantity; }
+    public int getProductPrice(){ return productPrice; }
 }
