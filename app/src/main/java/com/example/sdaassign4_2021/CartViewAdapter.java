@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,12 +16,12 @@ import java.util.ArrayList;
 
 
 public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.ViewHolder> {
-    private static final String TAG = "ViewHolder Cart";
-    private Context mNewContext;
+    private static final String TAG = "ViewHolder";
+    private Context mNewContext1;
     private ArrayList<Cart> mItem;
 
     CartViewAdapter(Context mNewContext, ArrayList<Cart> mCart) {
-        this.mNewContext = mNewContext;
+        this.mNewContext1 = mNewContext;
         this.mItem = mCart;
     }
 
@@ -34,15 +35,23 @@ public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        Log.d(TAG, "onBindViewHolder car: was called" );
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
+        Log.d(TAG, "onBindViewHolder CART: was called" );
 
         viewHolder.mProductNameTxt.setText(mItem.get(position).getProductName());
         viewHolder.mProductPriceTxt.setText("Amount: " + String.valueOf(mItem.get(position).getPrice() + " $"));
         viewHolder.mProductQtyTxt.setText("Qty: " + String.valueOf(mItem.get(position).getQuantity()));
         //viewHolder.mTotalAmountCart.setText(" ");
     }
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 
     @Override
     public int getItemCount() {
@@ -51,6 +60,7 @@ public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
         public TextView mProductNameTxt, mProductPriceTxt, mProductQtyTxt, mTotalAmountCart;
+        RelativeLayout itemCartParentLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,6 +69,7 @@ public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.ViewHo
             mProductPriceTxt = itemView.findViewById(R.id.productAmountCart);
             mProductQtyTxt = itemView.findViewById(R.id.productQtyCart);
             mTotalAmountCart = itemView.findViewById(R.id.cart_totalAmount);
+            itemCartParentLayout = itemView.findViewById(R.id.cartListItem);
         }
     }
 }

@@ -14,8 +14,9 @@
     <color name="primaryText">#B8B8B8</color>
     <color name="blueNavy">#182C61</color>
     <color name="tab1">#007568</color>
-    <color name="tab3">#EBE1D7</color>
-    <color name="tab2">#F2E5AB</color>
+    <color name="tab2">#EBE1D7</color>
+    <color name="icon">#683D12</color>
+    <color name="tab3">#F2E5AB</color>
     <color name="tabTextColor">#f7f1e3</color>
     <color name="tCustom">#CD9C08</color>
     <color name="wrong">#C3CD2819</color>

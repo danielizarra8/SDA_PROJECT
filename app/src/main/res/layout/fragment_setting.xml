@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scroll"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    tools:context=".Settings">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/welcome_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/background_settings"
-        >
+        android:fillViewport="true"
+        tools:context=".Settings">
 
         <Button
             android:id="@+id/logoutBtn"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="392dp"
-            android:background="@drawable/custom_button_welcome"
+            android:background="@drawable/btn_selector"
             android:text="Logout"
             android:textColor="@color/tabTextColor"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +29,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:background="@drawable/custom_button_welcome"
+            android:background="@drawable/btn_selector"
             android:text="Reset Password"
             android:textColor="@color/tabTextColor"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,15 +39,17 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
-            android:background="@drawable/custom_button"
+            android:background="@drawable/custom_button_welcome"
             android:ems="10"
             android:textAlignment="center"
             android:fontFamily="@font/aclonica"
             android:hint="Full name"
             android:inputType="textPersonName"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
             android:padding="10dp"
             android:text="Your Profile"
             android:textColor="@color/tabTextColor"
@@ -165,9 +163,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="132dp"
-            android:background="#000000"
-            android:backgroundTint="@color/listText"
-            android:src="@drawable/fui_ic_anonymous_white_24dp"
+            android:src="@drawable/ic_baseline_person_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -177,9 +173,7 @@
             android:layout_height="31dp"
             android:layout_marginStart="36dp"
             android:layout_marginTop="40dp"
-            android:background="#000000"
-            android:backgroundTint="@color/listText"
-            android:src="@drawable/fui_ic_phone_white_24dp"
+            android:src="@drawable/ic_baseline_local_phone_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emailIcon" />
 
@@ -189,8 +183,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
             android:layout_marginTop="34dp"
-            android:background="#232323"
-            android:src="@android:drawable/ic_menu_myplaces"
+            android:src="@drawable/ic_baseline_home_work_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/phoneIcon" />
 
@@ -200,12 +193,9 @@
             android:layout_height="23dp"
             android:layout_marginStart="36dp"
             android:layout_marginTop="40dp"
-            android:background="#000000"
-            android:backgroundTint="#000000"
-            android:src="@android:drawable/ic_dialog_email"
+            android:src="@drawable/ic_baseline_email_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileIcon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>

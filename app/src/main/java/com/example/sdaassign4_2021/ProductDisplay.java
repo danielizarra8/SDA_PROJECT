@@ -34,6 +34,7 @@ public class ProductDisplay extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_product_display);
         cartArrayList = new ArrayList<>();
         mCheckOutBtn = findViewById(R.id.checkoutBtn);
@@ -56,8 +57,7 @@ public class ProductDisplay extends AppCompatActivity {
         String productID = getIntent().getStringExtra("productID");
         String imageURL = getIntent().getStringExtra("imageURL");
 
-        //pass values from intent
-
+        int productPrice = Integer.valueOf(getIntent().getStringExtra("productPrice"));
         cartPrefs = this.getSharedPreferences(productID, MODE_PRIVATE);
         int cartSinQty = cartPrefs.getInt("product_qty", 0);
         int cartSinAmount = cartPrefs.getInt("product_amount",0);
@@ -69,9 +69,8 @@ public class ProductDisplay extends AppCompatActivity {
         mCartQtyTxt.setText(String.valueOf(cartTotalQty));
         mTotalAmountTxt.setText(String.valueOf(cartTotalAmount));
 
-
         //populate field values
-        populateFields(productName);
+        populateFields(productName, productPrice);
 
         Glide.with(mImageItem.getContext()).load(imageURL).into(mImageItem);
 
@@ -83,6 +82,7 @@ public class ProductDisplay extends AppCompatActivity {
                 //get the title and send it to the checkout activity
                 checkOutIntent.putExtra("userName","dummy text for user name");
                 checkOutIntent.putExtra("userID", "dummy text for user id");
+                checkOutIntent.putExtra("bookID", "dummy text for bookID");
                 startActivity(checkOutIntent);
             }
         });
@@ -92,7 +92,7 @@ public class ProductDisplay extends AppCompatActivity {
             public void onClick(View view) {
                 //cartArrayList.add(new Cart(productID,productName,196,169));
                 saveData(productID, productName);
-               // addTotalCart(cartTotalQty, price, cartTotalAmount);
+                addTotalCart(cartTotalQty, productPrice, cartTotalAmount);
                 //saveProductID(productName, productID, cartSinQty, price, cartSinAmount);
             }
         });
@@ -110,13 +110,12 @@ public class ProductDisplay extends AppCompatActivity {
         });
     }
 
-    private void populateFields(String productName) {
-        String priceTxt = getIntent().getStringExtra("productPrice");
+    private void populateFields(String productName, int productPrice) {
         String qty = getIntent().getStringExtra("productQty");
         String description = getIntent().getStringExtra("description");
         mNameTxt.setText(productName);
-        mPriceTxt.setText(priceTxt + " $");
-        mQtyText.setText(qty);
+        mPriceTxt.setText(productPrice + " $");
+        mQtyText.setText(qty + " qty");
         mDescriptionTxt.setText(description);
 
         int quantity = Integer.valueOf(qty);
@@ -138,21 +137,7 @@ public class ProductDisplay extends AppCompatActivity {
     }
 
     //Save each product individually in sharepreferences
-    private void saveProductID(String productName, String productID, int qty, int price, int totalCartAmount) {
-        SharedPreferences.Editor edit = cartPrefs.edit();
 
-        int productQty = qty + Integer.valueOf(numberButton.getNumber());
-        int productTotal = (price * Integer.valueOf(numberButton.getNumber())) + totalCartAmount;
-
-        edit.putString("product_name",productName);
-        edit.putString("product_id", productID);
-        edit.putInt("product_amount",productTotal);
-        edit.putInt("product_qty",productQty);
-        edit.commit();
-        //productListID.add(productID);
-        Toast.makeText(this, "Product added!", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-    }
     // add total amount and total quantity of items
     private void addTotalCart(int qty, int price, int totalCartAmount) {
         int cartQty = qty + Integer.valueOf(numberButton.getNumber());
@@ -162,6 +147,8 @@ public class ProductDisplay extends AppCompatActivity {
         edit.putInt("cart_amount",cartTotal);
         edit.putInt("cart_qty",cartQty);
         edit.commit();
+        Toast.makeText(this, "Product added!", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
     private void saveData(String productID, String productName) {
         SharedPreferences prefs = getSharedPreferences(CART_PRODUCTID_LIST_KEY, Context.MODE_PRIVATE);

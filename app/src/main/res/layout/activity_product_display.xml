@@ -46,6 +46,8 @@
         android:layout_toEndOf="@+id/addQtyBtn"
         android:background="@drawable/btn_selector"
         android:padding="3dp"
+        android:paddingTop="7dp"
+        android:paddingEnd="7dp"
         android:text="@string/add_product"
         android:textColor="@color/tCustom" />
 

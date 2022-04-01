@@ -3,12 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.12083333333333333" />
         <entry key="app/src/main/res/drawable/btn_selector.xml" value="0.13854166666666667" />
         <entry key="app/src/main/res/drawable/custom_button.xml" value="0.2578125" />
         <entry key="app/src/main/res/drawable/custom_button_welcome.xml" value="0.1375" />
         <entry key="app/src/main/res/drawable/custom_button_wellcome.xml" value="0.2578125" />
         <entry key="app/src/main/res/drawable/custom_input_design.xml" value="0.2578125" />
+        <entry key="app/src/main/res/drawable/ic_baseline_attach_money_24.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/ic_baseline_check_circle_24.xml" value="0.2518518518518518" />
+        <entry key="app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/ic_baseline_home_work_24.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/ic_baseline_local_phone_24.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.25625" />
+        <entry key="app/src/main/res/drawable/ic_baseline_store_24.xml" value="0.1359375" />
         <entry key="app/src/main/res/layout/activity_add_payment.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_check_out.xml" value="0.24010416666666667" />
         <entry key="app/src/main/res/layout/activity_checkout_java.xml" value="0.12135416666666667" />
@@ -21,6 +32,8 @@
         <entry key="app/src/main/res/layout/cart_list_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_book_list.xml" value="0.21195652173913043" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_cart_list.xml" value="0.10572916666666667" />
+        <entry key="app/src/main/res/layout/fragment_product_list.xml" value="0.121875" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.3236111111111111" />
         <entry key="app/src/main/res/layout/fragment_welcome.xml" value="0.21195652173913043" />
         <entry key="app/src/main/res/layout/fragment_wellcome.xml" value="0.1" />

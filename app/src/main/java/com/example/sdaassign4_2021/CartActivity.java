@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,21 +17,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.common.reflect.TypeToken;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -45,11 +37,11 @@ public class CartActivity extends Fragment {
     private static final String PRODUCTID_LIST_KET = "PRODUCTID_LIST_KEY";
     private ArrayList<Cart> mItem = new ArrayList<>();
     private final static String CART_KEY = "CART_KEY";
-
     RecyclerView recyclerView;
+
     CartViewAdapter recyclerViewAdapter;
     Button mCheckoutBtn, mEmptyBtn;
-    TextView totalAmountTxt;
+    TextView mTotalCartAmountTxt, mTotalCartQtyTxt, totalAmountTxt;
     private StorageReference storageReference;
     private FirebaseFirestore dbRef;
     private String productID;
@@ -67,18 +59,24 @@ public class CartActivity extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_cart, container, false);
         recyclerView = root.findViewById(R.id.cartListRecView);
-        recyclerView.setHasFixedSize(true);
         recyclerViewAdapter = new CartViewAdapter(getContext(), mItem);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        SharedPreferences totalPrefs = getActivity().getSharedPreferences(CART_KEY, Context.MODE_PRIVATE);
+        SharedPreferences prefs = getActivity().getSharedPreferences(CART_PRODUCTID_LIST_KEY, Context.MODE_PRIVATE);
+
+        int cartTotalQty = totalPrefs.getInt("cart_qty",0);
+        int cartTotalAmount = totalPrefs.getInt("cart_amount",0);
         totalAmountTxt = root.findViewById(R.id.cart_totalAmount);
         mCheckoutBtn = root.findViewById(R.id.cart_checkout_btn);
         mEmptyBtn = root.findViewById(R.id.cart_empty_btn);
+        mTotalCartQtyTxt = root.findViewById(R.id.cart_totalQty);
+        mTotalCartAmountTxt = root.findViewById(R.id.cart_totalAmount);
 
         dbRef = FirebaseFirestore.getInstance();
         //loadData();
-        getCartData();
+        getCartData(prefs,totalPrefs);
 
         mCheckoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,16 +94,25 @@ public class CartActivity extends Fragment {
         return root;
     }
 
-    public void getCartData() {
-        SharedPreferences prefs = getActivity().getSharedPreferences(CART_PRODUCTID_LIST_KEY,Context.MODE_PRIVATE);
+    public void getCartData(SharedPreferences prefs, SharedPreferences totalPrefs) {
+
+        int cartTotalQty = totalPrefs.getInt("cart_qty",0);
+        int cartTotalAmount = totalPrefs.getInt("cart_amount",0);
+
         Map<String, String> prefMap = (Map<String, String>) prefs.getAll();
 
         for (Map.Entry<String,String> entry: prefMap.entrySet()){
             Log.i("SharePreferencesMap", "loaded Key: " + entry.getKey() + " Value: " + entry.getValue() );
             //mItem = entry.getValue();
             //loadData(entry.getValue());
-            mItem.add(new Cart(entry.getKey(),entry.getValue(),69,96));
+
+                mItem.add(new Cart(entry.getKey(),entry.getValue(),69,96));
+                Toast.makeText(getContext(),"Map key added " + entry.getKey(),Toast.LENGTH_SHORT).show();
+
+           // mItem.add(new Cart(entry.getKey(),entry.getValue(),69,96));
         }
+        mTotalCartAmountTxt.setText("Total  = " + cartTotalAmount + "$");
+        mTotalCartQtyTxt.setText("Products = " + cartTotalQty);
         /*
         // get the storage reference from firebase where images are stored
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -176,20 +183,7 @@ public class CartActivity extends Fragment {
             // update the recyclerview adapter to reflect the changes, otherwise it won't display the data
             recyclerViewAdapter.notifyDataSetChanged();
         }
-        //Empty cart
-        mEmptyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cartPrefs.edit().clear().apply();
-                totalPrefs.edit().clear().apply();
-                startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
-            }
-        });
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
 
-    }
 }

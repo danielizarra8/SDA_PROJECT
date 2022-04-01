@@ -66,7 +66,7 @@ public class ProductActivity extends Fragment {
         getBookData();
 
 
-        RecyclerView recyclerView = root.findViewById(R.id.bookView_view);
+        RecyclerView recyclerView = root.findViewById(R.id.productView_view);
         recyclerViewAdapter = new ProductViewAdapter(getContext(), mProduct);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

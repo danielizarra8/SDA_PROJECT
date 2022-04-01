@@ -7,27 +7,19 @@
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:id="@+id/layout">
-<!--
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/tab1"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
--->
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="57dp"
+        android:layout_below="@+id/pager"
+        android:layout_alignParentBottom="true"
         android:background="@color/tab3"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        android:layout_alignParentBottom="true"
         app:tabSelectedTextColor="@color/tabSelect"
         app:tabTextColor="@color/tabTextColor">
 
@@ -36,9 +28,21 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="675dp">
 
     </androidx.viewpager.widget.ViewPager>
+    <FrameLayout android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
+    <ImageView
+        android:id="@+id/iconSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="6dp"
+        android:layout_marginRight="10dp"
+        app:srcCompat="@drawable/ic_baseline_settings_24" />
 </RelativeLayout>

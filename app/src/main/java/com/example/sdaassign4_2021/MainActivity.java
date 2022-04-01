@@ -2,8 +2,15 @@ package com.example.sdaassign4_2021;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
+
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.stripe.android.PaymentConfiguration;
@@ -12,15 +19,12 @@ import com.stripe.android.PaymentConfiguration;
  * This class is the starting point of the project
  * creates a new custom intent that broadcasts a vibration to a local BroadcastReceiver<br>
  * when the user selects a button in it's associated UI.
- * @author      @author Chris Coughlan 2019
  * @author      Adapted by Rafael Izarra (rafael.izarra2@mail.dcu.ie)
- * @version     1              <current version number of program>
- * @since       2021-12-06          <the version of the package this class was first added to>
- * @since       2022-01-26          last updated
  */
 public class MainActivity extends AppCompatActivity {
     public static final int BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT = 1;
     ViewPager viewPager;
+    ImageView settings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +33,8 @@ public class MainActivity extends AppCompatActivity {
                 getApplicationContext(),
                 "pk_live_51Kj6nfJhLsHwML0vh7tmG4JpsS5GKt77aueWiU4RWHAFK7WJ5Rih2ppPoOqGoqc5K92Nq7r0NmOqO3EtB3M3rnrG00O0SrmpGB"
         );
-        //set the toolbar we have overridden
-/*        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-*/
+
+        settings = findViewById(R.id.iconSetting);
         viewPager = findViewById(R.id.pager);
         ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager(), BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, getApplicationContext());
         viewPager.setAdapter(adapter);
@@ -42,10 +44,15 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_baseline_home_24);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_baseline_store_24);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_baseline_settings_24);
-        tabLayout.getTabAt(3).setIcon(R.drawable.ic_baseline_shopping_cart_24);
+        //tabLayout.getTabAt(2).setIcon(R.drawable.ic_baseline_settings_24);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_baseline_shopping_cart_24);
 
-
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),Settings.class));
+            }
+        });
     }
 
 }

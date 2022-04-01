@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 /**
- * @author Chris Coughlan 2019
  * @author Edited by Rafael Izarra 2022
  *
  * A ViewAdapter class using RecycleView
@@ -43,11 +42,9 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
                 fragment = new ProductActivity();
                 break;
             case 3:
-                fragment = new Settings();
-                break;
-            case 4:
                 fragment = new CartActivity();
                 break;
+
         }
 
         return fragment;
@@ -55,7 +52,7 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return 3;
     }
 
 

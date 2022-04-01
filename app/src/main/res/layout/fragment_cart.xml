@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReviewOrder">
+    tools:context=".CartActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="670dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -21,16 +21,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_alignParentTop="true"
-                android:background="@color/colorPrimary">
+                android:background="@color/tab3">
 
                 <TextView
                     android:id="@+id/cart_totalAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Total Price"
-                    android:textAlignment="center"
-                    android:textColorLink="@color/tabTextColor"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="@font/ubuntu_light"
+                    android:layout_marginLeft="10dp"
+                    android:textAllCaps="true"
+                    android:text=""
+                    android:textColorLink="@color/tab2"
+                    android:textSize="20dp" />
+
+
+                <TextView
+                    android:id="@+id/cart_totalQty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginRight="30dp"
+                    android:fontFamily="@font/ubuntu_light"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textAllCaps="true"
+                    android:textColorLink="@color/tab2"
                     android:textSize="20dp" />
 
             </RelativeLayout>
@@ -46,36 +62,43 @@
                 android:layout_marginTop="6dp"
                 android:layout_marginEnd="6dp" />
 
-            <Button
-                android:id="@+id/cart_empty_btn"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cartListRecView"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="10dp"
-                android:background="@color/colorPrimary"
-                android:text="Empty cart"
-                android:textColor="@color/tabTextColor"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/cart_checkout_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/cart_empty_btn"
-                android:layout_alignParentStart="true"
+                android:layout_alignStart="@id/cartListRecView"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="6dp"
-                android:background="@color/colorPrimary"
-                android:text="Check out"
-                android:textColor="@color/tabTextColor"
-                android:textSize="20sp" />
+                android:layout_marginBottom="20dp">
+
+                <Button
+                    android:id="@+id/cart_empty_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/colorPrimary"
+                    android:text="Empty cart"
+                    android:textColor="@color/tabTextColor"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/cart_checkout_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cart_empty_btn"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/colorPrimary"
+                    android:text="Check out"
+                    android:textColor="@color/tabTextColor"
+                    android:textSize="20sp" />
+            </RelativeLayout>
         </RelativeLayout>
 
     </ScrollView>
-</LinearLayout>
+</FrameLayout>

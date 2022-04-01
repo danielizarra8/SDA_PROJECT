@@ -38,7 +38,6 @@ package com.example.sdaassign4_2021;
         import java.util.ArrayList;
 
 /**
- * @author Chris Coughlan 2019
  * @author Edited by Rafael Izarra 2022
  */
 public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewAdapter.ViewHolder> {
@@ -65,7 +64,7 @@ public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
-        Log.d(TAG, "onBindViewHolder: was called" + mProduct.get(position).getProductURL());
+        Log.d(TAG, "onBindViewHolder Product: was called" + mProduct.get(position).getProductURL());
 
         viewHolder.mProductNameText.setText(mProduct.get(position).getProductName());
         viewHolder.mPriceText.setText(String.valueOf(mProduct.get(position).getProductPrice() + " $"));
@@ -95,10 +94,18 @@ public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewAdapter.
                 }
             });
     }
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
     @Override
-    public int getItemCount() {
-        return mProduct.size();
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemCount() { return mProduct.size();
     }
 
     //view holder class for recycler_list_item.xml

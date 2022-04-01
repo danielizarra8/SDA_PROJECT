@@ -8,7 +8,7 @@
         android:id="@+id/productImage"
         android:layout_width="92dp"
         android:layout_height="129dp"
-        android:contentDescription="@string/images_desc" />
+        android:contentDescription="Product image" />
 
     <TextView
         android:id="@+id/productNameTxt"
@@ -16,10 +16,10 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/productImage"
         android:layout_marginStart="16dp"
-        android:fontFamily="@font/ubuntu_light"
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/productImage"
-        android:text="@string/plc_author"
+        android:fontFamily="@font/ubuntu_light"
+        android:text="name"
         android:textAlignment="textStart"
         android:textColor="@color/listText"
         android:textSize="17sp" />
@@ -30,10 +30,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/productNameTxt"
         android:layout_marginStart="16dp"
-        android:fontFamily="@font/ubuntu_light"
         android:layout_marginTop="16dp"
         android:layout_toEndOf="@+id/productImage"
-        android:text="@string/plc_title"
+        android:fontFamily="@font/ubuntu_light"
+        android:text="price"
         android:textAlignment="center"
         android:textColor="@color/listText"
         android:textSize="17sp"
@@ -68,9 +68,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/productPriceTxt"
         android:layout_marginStart="16dp"
-        android:fontFamily="@font/ubuntu_light"
         android:layout_marginTop="16dp"
         android:layout_toEndOf="@+id/productImage"
+        android:fontFamily="@font/ubuntu_light"
         android:text="Availability" />
 
 </RelativeLayout>
