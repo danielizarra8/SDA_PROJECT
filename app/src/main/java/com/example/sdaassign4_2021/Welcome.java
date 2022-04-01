@@ -30,6 +30,7 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 public class Welcome extends Fragment {
 
+    private static final String USER_DATA_KEY = "USER_DATA_KEY";
     private static final String USER_NAME_KEY = "USER_NAME_KEY";
     private static final String USER_EMAIL_KEY = "USER_EMAIL_KEY";
     private static final String USER_PASSWORD_KEY = "USER_PASSWORD_KEY";
@@ -44,9 +45,11 @@ public class Welcome extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final SharedPreferences prefs = getActivity().getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
+
+        final SharedPreferences prefs = getActivity().getSharedPreferences(USER_DATA_KEY, Context.MODE_PRIVATE);
         final String userEmail = prefs.getString(USER_EMAIL_KEY,"");
         final String userPassword = prefs.getString(USER_PASSWORD_KEY,"");
+        String prefsName = prefs.getString(USER_NAME_KEY,"");
 
         if(userEmail != "" && userPassword != ""){
             if(!TextUtils.isEmpty(userEmail) && !TextUtils.isEmpty(userPassword)){
@@ -83,8 +86,8 @@ public class Welcome extends Fragment {
         else{
             mSignInBtn.setVisibility(getView().GONE);
             mSignUpBtn.setVisibility(getView().GONE);
-            String name = mWelcomeText.getText().toString() + " " + prefs.getString(USER_NAME_KEY,"");
-            mWelcomeText.setText(name);
+            String nameTxtView = mWelcomeText.getText().toString() + " " + prefsName;
+            mWelcomeText.setText(nameTxtView);
             mWelcomeText.setVisibility(getView().VISIBLE);
 
         }

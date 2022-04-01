@@ -12,27 +12,33 @@
         android:id="@+id/welcome_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/earth"
+        android:background="@drawable/background_settings"
         >
 
         <Button
             android:id="@+id/logoutBtn"
-            android:layout_width="150dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="244dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginTop="392dp"
+            android:background="@drawable/custom_button_welcome"
             android:text="Logout"
+            android:textColor="@color/tabTextColor"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/changePwdBtn"
-            android:layout_width="150dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/custom_button_welcome"
             android:text="Reset Password"
+            android:textColor="@color/tabTextColor"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logoutBtn" />
 
         <TextView
@@ -40,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
-            android:background="@color/tabTextColor"
+            android:background="@drawable/custom_button"
             android:ems="10"
             android:textAlignment="center"
             android:fontFamily="@font/aclonica"
@@ -48,7 +54,7 @@
             android:inputType="textPersonName"
             android:padding="10dp"
             android:text="Your Profile"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/tabTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,25 +62,27 @@
 
         <TextView
             android:id="@+id/nameProfile"
-            android:layout_width="100dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:background="@color/tabTextColor"
             android:ems="10"
             android:fontFamily="@font/aclonica"
+            android:layout_marginLeft="12dp"
             android:inputType="textPersonName"
             android:padding="10dp"
             android:text=""
             android:textColor="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.169"
+            app:layout_constraintHorizontal_bias="0.33"
             app:layout_constraintStart_toStartOf="@id/profileIcon"
             app:layout_constraintTop_toBottomOf="@+id/title" />
 
         <TextView
             android:id="@+id/emailProfile"
-            android:layout_width="100dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
             android:layout_marginTop="24dp"
             android:background="@color/tabTextColor"
             android:ems="10"
@@ -84,13 +92,13 @@
             android:text=""
             android:textColor="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.169"
+            app:layout_constraintHorizontal_bias="0.352"
             app:layout_constraintStart_toStartOf="@id/emailIcon"
             app:layout_constraintTop_toBottomOf="@+id/nameProfile" />
 
         <TextView
             android:id="@+id/phoneProfile"
-            android:layout_width="100dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:background="@color/tabTextColor"
@@ -101,13 +109,13 @@
             android:text=""
             android:textColor="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.169"
+            app:layout_constraintHorizontal_bias="0.416"
             app:layout_constraintStart_toStartOf="@id/phoneIcon"
             app:layout_constraintTop_toBottomOf="@+id/emailProfile" />
 
         <TextView
             android:id="@+id/addressProfile"
-            android:layout_width="100dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:background="@color/tabTextColor"
@@ -118,7 +126,7 @@
             android:text=""
             android:textColor="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.17"
+            app:layout_constraintHorizontal_bias="0.416"
             app:layout_constraintStart_toStartOf="@id/addressIcon"
             app:layout_constraintTop_toBottomOf="@+id/phoneProfile" />
 

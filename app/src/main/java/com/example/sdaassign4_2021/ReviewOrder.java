@@ -1,37 +1,41 @@
 package com.example.sdaassign4_2021;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.graphics.Color;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
-import android.text.style.BackgroundColorSpan;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Timestamp;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+import com.rey.material.widget.CheckBox;
 
-import java.sql.Time;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,47 +46,136 @@ import java.util.Map;
  * @author Edited by Rafael Izarra 2022
  */
 
-public class CheckOut extends AppCompatActivity {
+public class ReviewOrder extends AppCompatActivity {
+    private final static String CART_KEY = "CART_KEY";
+    private static final String USER_DATA_KEY = "USER_DATA_KEY";
+    private static final String USER_NAME_KEY = "USER_NAME_KEY";
+    private static final String USER_PHONE_KEY = "USER_PHONE_KEY";
+    private static final String USER_ADDRESS_KEY = "USER_ADDRESS_KEY";
+
     String TAG1="Checkout";
     FirebaseFirestore dbRef = null;
 
-    TextView mDisplaySummary, mBookAvailability;
-    Button sendOrderButton, setDateButton;
+    CheckBox checkBoxDelivery;
+    TextView mDisplaySummary, mPaymentDetails, mBookAvailability, mTotalOrderAmount, mTotalOrderQty, mDeliveryFee, mTotalAmountCart, mDeliveryAddress;
+    Button sendOrderButton, setDateButton, mAddCardButton;
     Calendar mDateAndTime = Calendar.getInstance();
     DocumentReference docRef;
-    String title, bookID;
+    String bookID, totalAmount, totalQty;
+    ImageView checkedIcon;
+    SharedPreferences totalPrefs, cartPrefs;
+    private int delivery_fee = 3;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // set the content view  to activity check our xml
-        setContentView(R.layout.activity_check_out);
+        setContentView(R.layout.activity_review_order);
 
         //instantiate the widgets variables
-        TextView mBookTitle = findViewById(R.id.confirm);
-        mBookAvailability = findViewById(R.id.availability);
-        sendOrderButton = findViewById(R.id.orderButton);
+        checkedIcon = findViewById(R.id.cartCheckedIcon);
+        mTotalOrderAmount = findViewById(R.id.totalAmountOrder);
+        mTotalAmountCart = findViewById(R.id.totalAmountCart);
+        mTotalOrderQty = findViewById(R.id.totalQtyOrder);
+        mDeliveryFee = findViewById(R.id.deliveryFeeTxt);
+        mDeliveryAddress = findViewById(R.id.deliveryDetailsTxt);
+        sendOrderButton = findViewById(R.id.sendOrderBtn);
+        mAddCardButton = findViewById(R.id.addCardBtn);
         setDateButton = findViewById(R.id.date);
+        checkBoxDelivery = findViewById(R.id.deliveryChkbox);
+        mPaymentDetails = findViewById(R.id.paymentDetailsStatus);
 
-        //set the toolbar we have overridden
-        /*
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-*/
-        //find the summary textview
-        mDisplaySummary = findViewById(R.id.orderSummary);
-
-        //set the text title Textview field of the book clicked and extract ID of the book
-        title = getIntent().getStringExtra("title");
         bookID = getIntent().getStringExtra("bookID");
-        mBookTitle.setText(title);
+        totalPrefs = getSharedPreferences(CART_KEY, MODE_PRIVATE);
+        int cartTotalQty = totalPrefs.getInt("cart_qty",0);
+        int cartTotalAmount = totalPrefs.getInt("cart_amount",0);
+        int totalOrderAmount = cartTotalAmount + delivery_fee;
+        totalAmount = String.valueOf(cartTotalAmount);
+        totalQty = String.valueOf(cartTotalQty);
+
+        //boolean isCardAdded = true;
+        mTotalAmountCart.setText(totalAmount + "$");
+        mTotalOrderQty.setText(totalQty + " Items");
+        mTotalOrderAmount.setText(String.valueOf(totalOrderAmount) + "$");
+        //activity for result
+        boolean b;
+        ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == 78){
+                            Intent intent = result.getData();
+                            if(intent != null){
+                                //get data
+                                boolean isCardAdded = intent.getBooleanExtra("card_status",true);
+                                if(isCardAdded == true){
+                                    mPaymentDetails.setText("Card added.");
+                                    checkedIcon.setVisibility(View.VISIBLE);
+                                    sendOrderButton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) { clickOnSendOrder(isCardAdded);}});
+                                }
+                            }
+                        }
+                    }
+                });
+
+        //add listener to addcard btn
+        mAddCardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //startActivity(new Intent(getApplicationContext(), CheckoutActivityJava.class));
+                Intent checkoutCardActivity = new Intent(getApplicationContext(),CheckoutActivityJava.class);
+                resultLauncher.launch(checkoutCardActivity);
+            }
+        });
+        sendOrderButton.setOnHoverListener(new View.OnHoverListener() {
+            @Override
+            public boolean onHover(View view, MotionEvent motionEvent) {
+                return false;
+            }
+        });
+
+
+        //find the summary textview
+        mDisplaySummary = findViewById(R.id.summaryTxt);
+
+        loadUserData();
 
         //instantiate the firsetose database and get the data getData()
         dbRef = FirebaseFirestore.getInstance();
         getdata(bookID);
+    }
+
+    private void clickOnSendOrder(boolean isCardAdded) {
+        if (isCardAdded == true){
+            Toast.makeText(this, "Order placed!", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Payment method is empty!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void loadUserData() {
+        SharedPreferences prefs = getSharedPreferences(USER_DATA_KEY, Context.MODE_PRIVATE);
+        String name = prefs.getString(USER_NAME_KEY,"user");
+        String phone = prefs.getString(USER_PHONE_KEY,"phone");
+        mDisplaySummary.setText("You are nearly there " + name + "! \n" +
+                                "Please review or add delivery and payment method before placing your order. \n" +
+                                "We will contact you though your: " + phone + " number to deliver your order \n");
+        mDeliveryAddress.setText(prefs.getString(USER_ADDRESS_KEY,"address"));
+        checkBoxDelivery.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(checkBoxDelivery.isChecked()){
+                        delivery_fee = 3;
+                    }else{
+                        delivery_fee = 0;
+                    }
+                mDeliveryFee.setText(String.valueOf(delivery_fee) + "$  (delivery)");
+            }
+        });
     }
 
     private void getdata(String bookID) {
@@ -97,8 +190,7 @@ public class CheckOut extends AppCompatActivity {
                         DocumentSnapshot dataSnapshot = task.getResult();
                         String author = dataSnapshot.getString("Author");
                         String availability = String.valueOf(dataSnapshot.getBoolean("Availability"));
-                        setAvailabilityView(availability);
-                        Toast.makeText(CheckOut.this, "Sucessfull book!.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ReviewOrder.this, "Congratulations, you have complete your purchase!.", Toast.LENGTH_SHORT).show();
                         Log.i(TAG1, "data was retrieved succesfully!");
                     } else {
                         Log.i(TAG1, "Book was not retrieved!");
@@ -137,7 +229,7 @@ public class CheckOut extends AppCompatActivity {
             }
         };
 
-        new DatePickerDialog(CheckOut.this, mDateListener,
+        new DatePickerDialog(ReviewOrder.this, mDateListener,
                 mDateAndTime.get(Calendar.YEAR),
                 mDateAndTime.get(Calendar.MONTH),
                 mDateAndTime.get(Calendar.DAY_OF_MONTH)).show();
@@ -152,7 +244,6 @@ public class CheckOut extends AppCompatActivity {
         //update the field summary with all details
         String finalSummary =   "USER NAME: " + getIntent().getStringExtra("userName") + "\n" +
                                 "USER ID: " + getIntent().getStringExtra("userID") + "\n" +
-                                "BOOK TILE: "+ title + " - BOOK ID: " + bookID + "\n" +
                                 "DATE: " + SelectedDate + " TIME: " + currentTime;
         //set the summary text to the textview field
         mDisplaySummary.setText(finalSummary);
@@ -185,21 +276,6 @@ public class CheckOut extends AppCompatActivity {
             sendOrderButton.setEnabled(false);
             }
         });
-
-
-    }
-
-    private void setAvailabilityView(String availability){
-        // this method enables the button (send order and select date) if details in the setting tab were sucessfully entered.
-        sendOrderButton.setEnabled(false);
-        setDateButton.setEnabled(false);
-        if (availability.equals("true")){
-        mBookAvailability.setText("Book is available, press send order to continue!");
-        sendOrderButton.setEnabled(true);
-        setDateButton.setEnabled(true);
-        }else{
-            mBookAvailability.setText("Book is unavailable at the moment!");
-        }
     }
 
     private void inserDateDB(String selectedDate){
@@ -211,7 +287,7 @@ public class CheckOut extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(CheckOut.this, "Sucessfull date added!.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ReviewOrder.this, "Sucessfull date added!.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

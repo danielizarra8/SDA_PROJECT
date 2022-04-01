@@ -38,7 +38,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class Settings extends Fragment {
 
     private static final String TAG = "verifyUserMessage";
+    private static final String USER_DATA_KEY = "USER_DATA_KEY";
     private static final String USER_NAME_KEY = "USER_NAME_KEY";
+    private static final String USER_PHONE_KEY = "USER_PHONE_KEY";
+    private static final String USER_ADDRESS_KEY = "USER_ADDRESS_KEY";
+    SharedPreferences userPrefs;
 
     TextView name, email, address, phone, verifyMessage;
     Button mLogoutBtn, mVerifyBtn, mChangePwdBtn;
@@ -58,7 +62,7 @@ public class Settings extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //save name share preferences
-        final SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
+        userPrefs = getActivity().getSharedPreferences(USER_DATA_KEY,Context.MODE_PRIVATE);
 
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_setting, container, false);
@@ -120,22 +124,12 @@ public class Settings extends Fragment {
                     email.setText(documentSnapshot.getString("email"));
                     address.setText(documentSnapshot.getString("address"));
                     phone.setText(documentSnapshot.getString("phone"));
-                    saveDetailsSharePreferences(documentSnapshot.getString("name"), prefs);
+                    saveDetailsSharePreferences(documentSnapshot.getString("name"),
+                                                documentSnapshot.getString("address"),
+                                                documentSnapshot.getString("phone"),
+                                                userPrefs);
                 }
             });
-        /*
-
-        String text = "All Rights reserved by DCU";
-
-        // add a span color and underline to the "DCU's" word target
-        SpannableString spannableString = new SpannableString(text);
-        ForegroundColorSpan foregroundColorSpanCustom = new ForegroundColorSpan(Color.rgb(204, 174, 98));
-        UnderlineSpan underlineSpan = new UnderlineSpan();
-        spannableString.setSpan(foregroundColorSpanCustom, 23, 26, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(underlineSpan, 23, 26, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        textView.setText(spannableString);
-*/
             //Reset the password button logic
             mChangePwdBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -183,7 +177,7 @@ public class Settings extends Fragment {
             mLogoutBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    prefs.edit().clear().apply();
+                    userPrefs.edit().clear().apply();
                     FirebaseAuth.getInstance().signOut();
                     startActivity(new Intent(getActivity(), Login.class));
                 }
@@ -195,9 +189,11 @@ public class Settings extends Fragment {
         return root;
     }
 
-    private void saveDetailsSharePreferences(String name, SharedPreferences prefs) {
+    private void saveDetailsSharePreferences(String name, String address, String phone, SharedPreferences prefs) {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(USER_NAME_KEY,name);
+        editor.putString(USER_ADDRESS_KEY,address);
+        editor.putString(USER_PHONE_KEY,phone);
         editor.apply();
     }
 

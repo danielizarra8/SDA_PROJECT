@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C6817460"
+    android:background="@color/tab2"
     tools:context=".ProductDisplay">
 
 
@@ -23,11 +23,12 @@
         android:layout_alignTop="@+id/productImage"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="-2dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="6dp"
         android:layout_toEndOf="@+id/productImage"
-        android:text="@string/plc_author"
+        android:fontFamily="@font/ubuntu_light"
+        android:text=""
         android:textAlignment="textStart"
         android:textColor="@color/listText"
         android:textSize="17sp" />
@@ -43,10 +44,10 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="30dp"
         android:layout_toEndOf="@+id/addQtyBtn"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/btn_selector"
         android:padding="3dp"
         android:text="@string/add_product"
-        android:textColor="@color/primaryText" />
+        android:textColor="@color/tCustom" />
 
     <Button
         android:id="@+id/checkoutBtn"
@@ -54,12 +55,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/cartBtn"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="190dp"
-        android:background="@drawable/custom_input_design"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="200dp"
+        android:background="@drawable/custom_button"
         android:text="@string/check_out"
-        android:textColor="@color/primaryText"
+        android:textColor="@color/tabTextColor"
         android:visibility="visible" />
 
     <ImageView
@@ -78,6 +82,7 @@
         android:layout_below="@+id/productNameTxt"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
+        android:fontFamily="@font/ubuntu_light"
         android:layout_toEndOf="@+id/productImage"
         android:text="Availability" />
 
@@ -103,7 +108,7 @@
         android:layout_height="36dp"
         android:layout_below="@+id/descriptionTxt"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="55dp"
         app:srcCompat="@drawable/ic_baseline_shopping_cart_24" />
 
@@ -112,10 +117,20 @@
         android:layout_width="43dp"
         android:layout_height="36dp"
         android:layout_below="@+id/descriptionTxt"
-        android:layout_marginStart="53dp"
+        android:layout_marginStart="27dp"
         android:layout_marginTop="55dp"
         android:layout_toEndOf="@+id/cartQty"
         app:srcCompat="@drawable/ic_baseline_attach_money_24" />
+
+    <ImageView
+        android:id="@+id/deleteIcon"
+        android:layout_width="43dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/descriptionTxt"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="55dp"
+        android:layout_toEndOf="@+id/totalMoneyTxt"
+        app:srcCompat="@drawable/ic_baseline_delete_24" />
 
     <TextView
         android:id="@+id/priceTxt"
@@ -123,6 +138,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/availabilityTxt"
         android:layout_marginStart="16dp"
+        android:fontFamily="@font/ubuntu_light"
         android:layout_marginTop="32dp"
         android:layout_toEndOf="@+id/productImage"
         android:text="Price" />
@@ -133,6 +149,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/priceTxt"
         android:layout_marginStart="16dp"
+        android:fontFamily="@font/ubuntu_light"
         android:layout_marginTop="32dp"
         android:layout_toEndOf="@+id/productImage"
         android:text="Quantity" />
@@ -144,6 +161,7 @@
         android:layout_below="@+id/addQtyBtn"
         android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
+        android:fontFamily="@font/ubuntu_light"
         android:layout_marginTop="24dp"
         android:text="Description" />
 
@@ -153,10 +171,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/descriptionTxt"
         android:layout_marginStart="7dp"
+        android:textSize="16sp"
         android:layout_marginTop="60dp"
-        android:textColor="@color/primaryText"
         android:layout_toEndOf="@+id/cartBtn"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textColor="@color/listText" />
 
     <TextView
         android:id="@+id/totalMoneyTxt"
@@ -164,8 +183,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/descriptionTxt"
         android:layout_marginStart="7dp"
+        android:textSize="16sp"
         android:layout_marginTop="60dp"
-        android:textColor="@color/primaryText"
         android:layout_toEndOf="@+id/moneyIcon"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textColor="@color/listText" />
 </RelativeLayout>

@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
+import com.stripe.android.PaymentConfiguration;
 
 /**
  * This class is the starting point of the project
@@ -24,7 +25,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        PaymentConfiguration.init(
+                getApplicationContext(),
+                "pk_live_51Kj6nfJhLsHwML0vh7tmG4JpsS5GKt77aueWiU4RWHAFK7WJ5Rih2ppPoOqGoqc5K92Nq7r0NmOqO3EtB3M3rnrG00O0SrmpGB"
+        );
         //set the toolbar we have overridden
 /*        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

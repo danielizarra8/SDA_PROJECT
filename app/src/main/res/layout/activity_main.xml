@@ -22,7 +22,7 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/tab2"
+        android:background="@color/tab3"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
         app:tabGravity="fill"

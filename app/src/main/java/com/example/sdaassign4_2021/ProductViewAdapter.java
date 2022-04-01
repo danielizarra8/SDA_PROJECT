@@ -41,23 +41,23 @@ package com.example.sdaassign4_2021;
  * @author Chris Coughlan 2019
  * @author Edited by Rafael Izarra 2022
  */
-public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.ViewHolder> {
+public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewAdapter.ViewHolder> {
     private static final String USER_NAME_KEY = "USER_NAME_KEY";
-    private static final String USER_ID_KEY = "USER_ID_KEY";
+    private static final String USER_DATA_KEY = "USER_DATA_KEY";
     private static final String TAG = "RecyclerViewAdapter";
     private Context mNewContext;
-    private ArrayList<Item> mItem;
+    private ArrayList<Product> mProduct;
 
 
-    LibraryViewAdapter(Context mNewContext, ArrayList<Item> mbook) {
+    ProductViewAdapter(Context mNewContext, ArrayList<Product> mProduct) {
         this.mNewContext = mNewContext;
-        this.mItem = mbook;
+        this.mProduct = mProduct;
     }
 
     //declare methods
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_list_item, viewGroup, false);
         return new ViewHolder(view);
 
@@ -65,17 +65,17 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
-        Log.d(TAG, "onBindViewHolder: was called" + mItem.get(position).getProductURL());
+        Log.d(TAG, "onBindViewHolder: was called" + mProduct.get(position).getProductURL());
 
-        viewHolder.mProductNameText.setText(mItem.get(position).getProductName());
-        viewHolder.mPriceText.setText(String.valueOf(mItem.get(position).getProductPrice() + " $"));
+        viewHolder.mProductNameText.setText(mProduct.get(position).getProductName());
+        viewHolder.mPriceText.setText(String.valueOf(mProduct.get(position).getProductPrice() + " $"));
 
         /**  the following if statement checks the availability of the book and if the book is available(true)
          * the text will be set "Available" and color "green"
          *Otherwise, show "Out of stock" and "reed"
          */
 
-        if (mItem.get(position).getProductQuantity() > 0) {
+        if (mProduct.get(position).getProductQuantity() > 0) {
             viewHolder.availabilityText.setText("Available");
             viewHolder.availabilityText.setTextColor(Color.parseColor("#2c8300"));
         }else{
@@ -84,21 +84,21 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
             viewHolder.availabilityText.setTextColor(Color.parseColor("#e31300"));
         }
 
-        Glide.with(viewHolder.imageItem.getContext()).load(mItem.get(position).getProductURL()).into(viewHolder.imageItem);
+        Glide.with(viewHolder.imageItem.getContext()).load(mProduct.get(position).getProductURL()).into(viewHolder.imageItem);
 
         //should check here to see if the book is available.
 
             viewHolder.checkOut.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    checkOutBook(v,position);
+                    clickOnProductView(v,position);
                 }
             });
     }
 
     @Override
     public int getItemCount() {
-        return mItem.size();
+        return mProduct.size();
     }
 
     //view holder class for recycler_list_item.xml
@@ -124,11 +124,11 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
 
         }
     }
-    private void checkOutBook(View v, int position) {
-        final SharedPreferences prefs = mNewContext.getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
+    private void clickOnProductView(View v, int position) {
+        final SharedPreferences prefs = mNewContext.getSharedPreferences(USER_DATA_KEY, Context.MODE_PRIVATE);
 
         String texUserName = prefs.getString(USER_NAME_KEY, "");
-        String userID = prefs.getString(USER_ID_KEY, "");
+        //String userID = prefs.getString(USER_ID_KEY, "");
         if (texUserName.equals("")) {
             AlertDialog.Builder builder = new AlertDialog.Builder(mNewContext);
             builder.setTitle("Notification!").setMessage("Customer Name not set.").setPositiveButton("OK", null).show();
@@ -136,14 +136,14 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
             //...
             Intent displaySingleProduct = new Intent(mNewContext, ProductDisplay.class);
             //get the title and send it to the checkout activity
-            displaySingleProduct.putExtra("imageURL", mItem.get(position).getProductURL());
-            displaySingleProduct.putExtra("description", mItem.get(position).getProductDescription());
-            displaySingleProduct.putExtra("productName", mItem.get(position).getProductName());
-            displaySingleProduct.putExtra("productID", mItem.get(position).getProductID());
-            displaySingleProduct.putExtra("productPrice", String.valueOf(mItem.get(position).getProductPrice()));
-            displaySingleProduct.putExtra("productQty", String.valueOf(mItem.get(position).getProductQuantity()));
+            displaySingleProduct.putExtra("imageURL", mProduct.get(position).getProductURL());
+            displaySingleProduct.putExtra("description", mProduct.get(position).getProductDescription());
+            displaySingleProduct.putExtra("productName", mProduct.get(position).getProductName());
+            displaySingleProduct.putExtra("productID", mProduct.get(position).getProductID());
+            displaySingleProduct.putExtra("productPrice", String.valueOf(mProduct.get(position).getProductPrice()));
+            displaySingleProduct.putExtra("productQty", String.valueOf(mProduct.get(position).getProductQuantity()));
             displaySingleProduct.putExtra("userName",texUserName);
-            displaySingleProduct.putExtra("userID",userID);
+            //displaySingleProduct.putExtra("userID",userID);
             mNewContext.startActivity(displaySingleProduct);
         }
     }

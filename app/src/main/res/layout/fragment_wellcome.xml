@@ -5,31 +5,10 @@
     android:id="@+id/relative"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/windowBackground"
+    android:background="@drawable/backgroundmain"
     android:fillViewport="true"
     tools:context=".Welcome">
 
-    <ImageView
-        android:id="@+id/appLogo"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:src="@drawable/candy" />
-
-    <TextView
-        android:id="@+id/appTitle"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="160dp"
-        android:layout_marginEnd="88dp"
-        android:text="The best product for you store!"
-        android:textAlignment="center"
-        android:textColor="@color/primaryText"
-        android:textSize="22sp"
-        android:textStyle="bold" />
 
     <Button
         android:id="@+id/signInBtn"
@@ -66,15 +45,17 @@
         android:id="@+id/welcomeTextUser"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/appTitle"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="302dp"
-        android:layout_marginEnd="106dp"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="102dp"
+        android:fontFamily="@font/ubuntu_light"
         android:text="Welcome to Macys, "
         android:textAlignment="center"
-        android:textColor="@color/primaryText"
-        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:visibility="visible" />
 

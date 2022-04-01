@@ -1,7 +1,6 @@
 package com.example.sdaassign4_2021;
 
 import android.content.Context;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -41,13 +40,13 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
                 break;
             case 2:
                 //code
-                fragment = new BookList();
+                fragment = new ProductActivity();
                 break;
             case 3:
                 fragment = new Settings();
                 break;
             case 4:
-                fragment = new Cart();
+                fragment = new CartActivity();
                 break;
         }
 
@@ -59,30 +58,5 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
         return 4;
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        position = position+1;
 
-        CharSequence tabTitle = "";
-
-        //finds the fragment
-        switch (position)
-        {
-            case 1:
-                //code
-                tabTitle = "";
-
-                break;
-            case 2:
-                //code
-                tabTitle = "";
-                break;
-            case 3:
-                //code
-                tabTitle = "";
-                break;
-        }
-
-        return tabTitle;
-    }
 }

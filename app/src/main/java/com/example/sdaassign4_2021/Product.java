@@ -6,7 +6,7 @@ import java.util.Objects;
  *
  * A ViewAdapter class using RecycleView
  */
-public class Item {
+public class Product {
     private String productName;
     private String productDescription;
     private String productID;
@@ -24,7 +24,7 @@ public class Item {
      *
      * */
 
-    public Item(String vProductName, int vProductPrice, String vProductDescription, String vBookId, String url, int vProductQty){
+    public Product(String vProductName, int vProductPrice, String vProductDescription, String vBookId, String url, int vProductQty){
         this.productName = vProductName;
         this.productPrice = vProductPrice;
         this.productDescription = vProductDescription;
@@ -34,7 +34,7 @@ public class Item {
 
     }
 
-    public Item(){
+    public Product(){
 
     }
 
@@ -51,7 +51,7 @@ public class Item {
     // to check duplicate books in the list comparing by id
     @Override
     public boolean equals(Object o) {
-        return productID.equals(((Item)o).productID);
+        return productID.equals(((Product)o).productID);
     }
 
     @Override

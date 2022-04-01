@@ -29,6 +29,7 @@ public class Login extends AppCompatActivity {
     // Instance of variable required in the activity
     private static final String USER_EMAIL_KEY = "USER_EMAIL_KEY";
     private static final String USER_PASSWORD_KEY = "USER_PASSWORD_KEY";
+    private static final String USER_LOGIN_DATA_KEY = "USER_LOGIN_DATA_KEY";
 
     EditText mEmail, mPassword;
     Button mLoginBtn;
@@ -43,7 +44,8 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //Initializing the variables.
-        final SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
+        //final SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences prefs = this.getSharedPreferences(USER_LOGIN_DATA_KEY,Context.MODE_PRIVATE);
 
 
         mEmail = findViewById(R.id.editTextEmail);

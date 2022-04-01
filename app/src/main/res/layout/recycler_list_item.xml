@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/productImage"
         android:layout_marginStart="16dp"
+        android:fontFamily="@font/ubuntu_light"
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/productImage"
         android:text="@string/plc_author"
@@ -29,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/productNameTxt"
         android:layout_marginStart="16dp"
+        android:fontFamily="@font/ubuntu_light"
         android:layout_marginTop="16dp"
         android:layout_toEndOf="@+id/productImage"
         android:text="@string/plc_title"
@@ -43,11 +45,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/productPriceTxt"
         android:layout_alignParentEnd="true"
+        android:padding="5dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@color/primaryText"
+        android:background="@drawable/custom_button"
         android:text="@string/view_product"
-        android:textColor="@color/blueNavy"
+        android:fontFamily="@font/ubuntu_light"
+        android:textColor="@color/tabTextColor"
         android:visibility="visible" />
 
     <ImageView
@@ -64,6 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/productPriceTxt"
         android:layout_marginStart="16dp"
+        android:fontFamily="@font/ubuntu_light"
         android:layout_marginTop="16dp"
         android:layout_toEndOf="@+id/productImage"
         android:text="Availability" />

@@ -33,40 +33,33 @@ import java.util.ArrayList;
  * @author Chris Coughlan
  * @author Edited by Rafael Izarra 2022
  */
-public class BookList extends Fragment {
+public class ProductActivity extends Fragment {
     private static final String TAG1 = "retrieveImg";
     private static final String TAG2 = "retrievebooks";
 
     //declare variables, database and widgets
 
-    private ArrayList<Item> mItem = new ArrayList<>();
+    private ArrayList<Product> mProduct = new ArrayList<>();
 
     StorageReference imageRef;
     StorageReference storageReference;
-    LibraryViewAdapter recyclerViewAdapter;
+    ProductViewAdapter recyclerViewAdapter;
 
-    String productName;
-    int productPrice;
-    String productDescription;
-    int productQty;
-    String id;
-    String url;
-    String url1;
-    boolean isAvailable;
+    int productPrice, productQty;
+    String productDescription, productName;
+    String id, url, url1;
 
     FirebaseFirestore dbRef;
 
-    public BookList() {
+    public ProductActivity() {
         // Required empty public constructor
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_book_list, container, false);
+        View root = inflater.inflate(R.layout.fragment_product_list, container, false);
 
         //instantiate the database and call the getBookData() method to retireve book's data
         dbRef = FirebaseFirestore.getInstance();
@@ -74,7 +67,7 @@ public class BookList extends Fragment {
 
 
         RecyclerView recyclerView = root.findViewById(R.id.bookView_view);
-        recyclerViewAdapter = new LibraryViewAdapter(getContext(), mItem);
+        recyclerViewAdapter = new ProductViewAdapter(getContext(), mProduct);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -86,12 +79,12 @@ public class BookList extends Fragment {
         // get the storage reference from firebase where images are stored
         storageReference = FirebaseStorage.getInstance().getReference();
 
-        //point to the right collection in the database
+        //point to product collection in the database
         dbRef.collection("products").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()) {
-                    //loop through each ducument retrieved
+                    //loop through each ducument(product) retrieved
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         url = document.getString("url");
                         // set the right path
@@ -107,7 +100,7 @@ public class BookList extends Fragment {
                                 productDescription = (String) (document.getString("description"));
                                 productQty = document.getLong("quantity").intValue();
                                 id = document.getId();
-                                mItem.add(new Item(productName, productPrice, productDescription, id, url1, productQty));
+                                mProduct.add(new Product(productName, productPrice, productDescription, id, url1, productQty));
                                 // update the recyclerview adapater to reflect the changes, otherwise it won't display the data
                                 recyclerViewAdapter.notifyDataSetChanged();
                             }
