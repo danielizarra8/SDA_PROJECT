@@ -14,7 +14,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:padding="12dp"
         android:background="@color/colorPrimaryDark">
 
@@ -29,21 +29,9 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/productQtyCart"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:text="Qty"
-            android:textAlignment="viewEnd"
-            android:textColor="@color/tabTextColor"
-            android:textSize="14sp"
-            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/productAmountCart"
+            android:id="@+id/productIdCart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/productNameCart"
@@ -51,11 +39,9 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="5dp"
-            android:gravity="center"
-            android:text="Price"
+            android:text="ID"
             android:textColor="@color/tabTextColor"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textSize="12sp" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
 </RelativeLayout>

@@ -45,12 +45,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/productPriceTxt"
         android:layout_alignParentEnd="true"
-        android:padding="5dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/custom_button"
-        android:text="@string/view_product"
         android:fontFamily="@font/ubuntu_light"
+        android:padding="5dp"
+        android:text="@string/view_product"
         android:textColor="@color/tabTextColor"
         android:visibility="visible" />
 

@@ -114,11 +114,12 @@ public class Register extends AppCompatActivity {
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Log.i(TAG, "Failure to verify user's email address. Reason: " + e.getMessage());
+                                        Toast.makeText(Register.this,"Failure to verify user's email address. Reason: " + e.getMessage(),
+                                                Toast.LENGTH_SHORT).show();
                                     }
                                 });
 
-                                Toast.makeText(Register.this, "User created sucessfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Register.this, "User created successfully", Toast.LENGTH_SHORT).show();
                                 //retrieve the user id from the firestore auth module which will be used to create a new doc for each user.
                                 userID = fAuth.getCurrentUser().getUid();
                                 //get the reference of the firestore db and create a user collection to save users' details in the given document (user id).

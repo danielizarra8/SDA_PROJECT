@@ -52,7 +52,7 @@
         android:layout_marginTop="46dp"
         android:layout_marginEnd="102dp"
         android:fontFamily="@font/ubuntu_light"
-        android:text="Welcome to Macys, "
+        android:text="Welcome to Macys"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="22sp"

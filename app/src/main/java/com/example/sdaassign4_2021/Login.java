@@ -23,13 +23,23 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.rey.material.widget.CheckBox;
 
 public class Login extends AppCompatActivity {
     // Instance of variable required in the activity
     private static final String USER_EMAIL_KEY = "USER_EMAIL_KEY";
-    private static final String USER_PASSWORD_KEY = "USER_PASSWORD_KEY";
-    private static final String USER_LOGIN_DATA_KEY = "USER_LOGIN_DATA_KEY";
+    private static final String USER_LOGGED_IN = "USER_LOGGED_IN";
+    private static final String USER_DATA_KEY = "USER_DATA_KEY";
+    private static final String USER_NAME_KEY = "USER_NAME_KEY";
+    private static final String USER_ID_KEY = "USER_ID_KEY";
+    private static final String USER_PHONE_KEY = "USER_PHONE_KEY";
+    private static final String USER_ADDRESS_KEY = "USER_ADDRESS_KEY";
+    SharedPreferences userPrefs;
 
     EditText mEmail, mPassword;
     Button mLoginBtn;
@@ -37,16 +47,17 @@ public class Login extends AppCompatActivity {
     TextView mCreateBtn, forgotPassword;
     ProgressBar progressBar;
     FirebaseAuth fAuth;
-
+    FirebaseUser fUser;
+    FirebaseFirestore fStore;
+    String name, address, phone, userID;
+    SharedPreferences prefs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         //Initializing the variables.
-        //final SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences prefs = this.getSharedPreferences(USER_LOGIN_DATA_KEY,Context.MODE_PRIVATE);
-
+        prefs = this.getSharedPreferences(USER_DATA_KEY,Context.MODE_PRIVATE);
 
         mEmail = findViewById(R.id.editTextEmail);
         mPassword = findViewById(R.id.password);
@@ -56,7 +67,9 @@ public class Login extends AppCompatActivity {
         mCreateBtn = findViewById(R.id.createText);
         checkBoxRemember = findViewById(R.id.rememberChkbox);
 
+        //Instancitate the firebase authenticate and database module
         fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,14 +99,32 @@ public class Login extends AppCompatActivity {
                 fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
                         if(task.isSuccessful()) {
+                            //get current user to verify email.
+                            fUser = fAuth.getCurrentUser();
+                            //retrieve the current user id.
+                            userID = fAuth.getCurrentUser().getUid();
                             // saving user's details in preferences if the user wants to keep logged in.
                             if (checkBoxRemember.isChecked()) {
-                                SharedPreferences.Editor editor = prefs.edit();
-                                editor.putString(USER_EMAIL_KEY, email);
-                                editor.putString(USER_PASSWORD_KEY, password);
-                                editor.apply();
-                                }
+                                //retrieve data (phone,email,name) using DocumentReference from the firestore db associated with the user is.
+                                DocumentReference documentReference = fStore.collection("users").document(userID);
+                                documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        name = (documentSnapshot.getString("name"));
+                                        address = (documentSnapshot.getString("address"));
+                                        phone = (documentSnapshot.getString("phone"));
+                                        saveDetailsSharePreferences(
+                                                documentSnapshot.getString("name"),
+                                                documentSnapshot.getString("address"),
+                                                documentSnapshot.getString("phone"),
+                                                email,
+                                                userID,
+                                                password);
+                                    }
+                                });
+                            }
                             Toast.makeText(Login.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }else{
@@ -159,5 +190,16 @@ public class Login extends AppCompatActivity {
         });
 
         passwordResetDialog.create().show();
+    }
+    private void saveDetailsSharePreferences(String name, String address, String phone, String email, String ID, String password) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(USER_ID_KEY,ID);
+        editor.putString(USER_NAME_KEY,name);
+        editor.putString(USER_ADDRESS_KEY,address);
+        editor.putString(USER_PHONE_KEY,phone);
+        editor.putString(USER_EMAIL_KEY,email);
+        editor.putBoolean(USER_LOGGED_IN,true);
+        editor.putString("user_pw",password);
+        editor.apply();
     }
 }

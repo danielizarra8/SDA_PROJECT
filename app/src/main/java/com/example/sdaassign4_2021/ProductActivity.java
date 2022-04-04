@@ -34,12 +34,11 @@ import java.util.ArrayList;
  * @author Edited by Rafael Izarra 2022
  */
 public class ProductActivity extends Fragment {
-    private static final String TAG1 = "retrieveImg";
-    private static final String TAG2 = "retrievebooks";
 
     //declare variables, database and widgets
 
     private ArrayList<Product> mProduct = new ArrayList<>();
+    private ArrayList<String>mProductName = new ArrayList<>();
 
     StorageReference imageRef;
     StorageReference storageReference;
@@ -101,7 +100,8 @@ public class ProductActivity extends Fragment {
                                 productQty = document.getLong("quantity").intValue();
                                 id = document.getId();
                                 mProduct.add(new Product(productName, productPrice, productDescription, id, url1, productQty));
-                                // update the recyclerview adapater to reflect the changes, otherwise it won't display the data
+
+                                // update the recyclerview adapter to reflect the changes, otherwise it won't display the data
                                 recyclerViewAdapter.notifyDataSetChanged();
                             }
                         });

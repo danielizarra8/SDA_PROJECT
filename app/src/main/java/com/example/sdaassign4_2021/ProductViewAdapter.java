@@ -21,6 +21,7 @@ package com.example.sdaassign4_2021;
         import android.content.Intent;
         import android.content.SharedPreferences;
         import android.graphics.Color;
+        import android.os.Parcelable;
         import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
@@ -69,11 +70,7 @@ public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewAdapter.
         viewHolder.mProductNameText.setText(mProduct.get(position).getProductName());
         viewHolder.mPriceText.setText(String.valueOf(mProduct.get(position).getProductPrice() + " $"));
 
-        /**  the following if statement checks the availability of the book and if the book is available(true)
-         * the text will be set "Available" and color "green"
-         *Otherwise, show "Out of stock" and "reed"
-         */
-
+        // check product is available
         if (mProduct.get(position).getProductQuantity() > 0) {
             viewHolder.availabilityText.setText("Available");
             viewHolder.availabilityText.setTextColor(Color.parseColor("#2c8300"));
@@ -135,11 +132,7 @@ public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewAdapter.
         final SharedPreferences prefs = mNewContext.getSharedPreferences(USER_DATA_KEY, Context.MODE_PRIVATE);
 
         String texUserName = prefs.getString(USER_NAME_KEY, "");
-        //String userID = prefs.getString(USER_ID_KEY, "");
-        if (texUserName.equals("")) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(mNewContext);
-            builder.setTitle("Notification!").setMessage("Customer Name not set.").setPositiveButton("OK", null).show();
-        } else {
+
             //...
             Intent displaySingleProduct = new Intent(mNewContext, ProductDisplay.class);
             //get the title and send it to the checkout activity
@@ -150,8 +143,6 @@ public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewAdapter.
             displaySingleProduct.putExtra("productPrice", String.valueOf(mProduct.get(position).getProductPrice()));
             displaySingleProduct.putExtra("productQty", String.valueOf(mProduct.get(position).getProductQuantity()));
             displaySingleProduct.putExtra("userName",texUserName);
-            //displaySingleProduct.putExtra("userID",userID);
             mNewContext.startActivity(displaySingleProduct);
-        }
     }
 }

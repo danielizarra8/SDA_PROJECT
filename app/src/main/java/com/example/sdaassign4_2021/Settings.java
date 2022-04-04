@@ -38,11 +38,12 @@ public class Settings extends AppCompatActivity {
     private static final String USER_DATA_KEY = "USER_DATA_KEY";
     private static final String USER_NAME_KEY = "USER_NAME_KEY";
     private static final String USER_PHONE_KEY = "USER_PHONE_KEY";
+    private static final String USER_EMAIL_KEY = "USER_EMAIL_KEY";
     private static final String USER_ADDRESS_KEY = "USER_ADDRESS_KEY";
     SharedPreferences userPrefs;
 
-    TextView name, email, address, phone, verifyMessage;
-    Button mLogoutBtn, mVerifyBtn, mChangePwdBtn;
+    TextView name, email, address, phone, verifyMessage, mLoginMessage;
+    Button mLogoutBtn, mVerifyBtn, mChangePwdBtn, mLoginBtn;
     String userID;
 
     FirebaseAuth fAuth;
@@ -55,17 +56,25 @@ public class Settings extends AppCompatActivity {
             userPrefs = getSharedPreferences(USER_DATA_KEY,Context.MODE_PRIVATE);
             fAuth = FirebaseAuth.getInstance();
 
+            mChangePwdBtn = findViewById(R.id.changePwdBtn);
+            mLogoutBtn = findViewById(R.id.logoutBtn);
+
             // display data if user is logged in otherwise display empty fields
             if(fAuth.getCurrentUser() !=null) {
 
+                //check if user has verified the email
                 verifyMessage = findViewById(R.id.verifyMessage);
                 mVerifyBtn = findViewById(R.id.verifyBtn);
-                mChangePwdBtn = findViewById(R.id.changePwdBtn);
 
                 name = findViewById(R.id.nameProfile);
                 email = findViewById(R.id.emailProfile);
                 address = findViewById(R.id.addressProfile);
                 phone = findViewById(R.id.phoneProfile);
+
+                name.setText(userPrefs.getString(USER_NAME_KEY,""));
+                email.setText(userPrefs.getString(USER_EMAIL_KEY,""));
+                address.setText(userPrefs.getString(USER_ADDRESS_KEY,""));
+                phone.setText(userPrefs.getString(USER_PHONE_KEY,""));
 
                 //Instancitate the firebase authenticate and database module
                 //fAuth = FirebaseAuth.getInstance();
@@ -100,21 +109,6 @@ public class Settings extends AppCompatActivity {
                     });
                 }
 
-                //retrieve data (phone,email,name) using DocumentReference from the firestore db associated with the user is.
-                DocumentReference documentReference = fStore.collection("users").document(userID);
-                documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        name.setText(documentSnapshot.getString("name"));
-                        email.setText(documentSnapshot.getString("email"));
-                        address.setText(documentSnapshot.getString("address"));
-                        phone.setText(documentSnapshot.getString("phone"));
-                        saveDetailsSharePreferences(documentSnapshot.getString("name"),
-                                documentSnapshot.getString("address"),
-                                documentSnapshot.getString("phone"),
-                                userPrefs);
-                    }
-                });
                 //Reset the password button logic
                 mChangePwdBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -158,7 +152,6 @@ public class Settings extends AppCompatActivity {
                 });
 
                 //logout the user and redirect it to the login page
-                mLogoutBtn = findViewById(R.id.logoutBtn);
                 mLogoutBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -168,16 +161,21 @@ public class Settings extends AppCompatActivity {
                     }
                 });
             }else{
-                Log.d(TAG,"Log in first");
+                mLoginMessage = findViewById(R.id.loginMessage);
+                mLoginBtn = findViewById(R.id.loginBtn);
+                mLoginMessage.setVisibility(View.VISIBLE);
+                mLoginBtn.setVisibility(View.VISIBLE);
+                mChangePwdBtn.setVisibility(View.GONE);
+                mLogoutBtn.setVisibility(View.GONE);
+
+                mLoginBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                    }
+                });
+
             }
         }
-
-    private void saveDetailsSharePreferences(String name, String address, String phone, SharedPreferences prefs) {
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(USER_NAME_KEY,name);
-        editor.putString(USER_ADDRESS_KEY,address);
-        editor.putString(USER_PHONE_KEY,phone);
-        editor.apply();
-    }
 
 }

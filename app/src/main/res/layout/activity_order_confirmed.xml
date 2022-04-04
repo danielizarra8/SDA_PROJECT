@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OrderConfirmed">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp">
+
+        <LinearLayout
+            android:id="@id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="top"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.075">
+
+            <TextView
+                android:id="@+id/ordersummaryTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="@color/tab1"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mainContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linear">
+
+            <TextView
+                android:layout_width="171dp"
+                android:layout_height="27dp"
+                android:layout_marginLeft="100dp"
+                android:fontFamily="@font/sonsie_one"
+                android:text="@string/title"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.049" />
+
+            <TextView
+                android:id="@+id/orderUserName"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="28dp"
+                android:background="@color/tabTextColor"
+                android:ems="10"
+                android:fontFamily="@font/aclonica"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.33"
+                app:layout_constraintStart_toStartOf="@id/profileIcon"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
+
+            <TextView
+                android:id="@+id/orderUserID"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/tabTextColor"
+                android:ems="10"
+                android:fontFamily="@font/aclonica"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.352"
+                app:layout_constraintStart_toStartOf="@id/emailIcon"
+                app:layout_constraintTop_toBottomOf="@+id/nameProfile" />
+
+            <TextView
+                android:id="@+id/orderPhoneProfile"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/tabTextColor"
+                android:ems="10"
+                android:fontFamily="@font/aclonica"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.416"
+                app:layout_constraintStart_toStartOf="@id/phoneIcon"
+                app:layout_constraintTop_toBottomOf="@+id/emailProfile" />
+
+            <TextView
+                android:id="@+id/orderAddressProfile"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/tabTextColor"
+                android:ems="10"
+                android:fontFamily="@font/aclonica"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.416"
+                app:layout_constraintStart_toStartOf="@id/addressIcon"
+                app:layout_constraintTop_toBottomOf="@+id/phoneProfile" />
+
+            <TextView
+                android:id="@+id/orderCurrentDate"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/tabTextColor"
+                android:ems="10"
+                android:fontFamily="@font/aclonica"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.416"
+                app:layout_constraintStart_toStartOf="@id/addressIcon"
+                app:layout_constraintTop_toBottomOf="@+id/phoneProfile" />
+
+            <TextView
+                android:id="@+id/orderExpectDate"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/tabTextColor"
+                android:ems="10"
+                android:fontFamily="@font/aclonica"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.416"
+                app:layout_constraintStart_toStartOf="@id/addressIcon"
+                app:layout_constraintTop_toBottomOf="@+id/phoneProfile" />
+
+            <TextView
+                android:id="@+id/orderTotalQty"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/tabTextColor"
+                android:ems="10"
+                android:fontFamily="@font/aclonica"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.416"
+                app:layout_constraintStart_toStartOf="@id/addressIcon"
+                app:layout_constraintTop_toBottomOf="@+id/phoneProfile" />
+
+            <TextView
+                android:id="@+id/orderTotalAmount"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/tabTextColor"
+                android:ems="10"
+                android:fontFamily="@font/aclonica"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.416"
+                app:layout_constraintStart_toStartOf="@id/addressIcon"
+                app:layout_constraintTop_toBottomOf="@+id/phoneProfile" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
+
+            <Button
+                android:id="@+id/getInvoiceBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/custom_button_welcome"
+                android:text="GET PDF"
+                android:textColor="@color/tabTextColor" />
+
+            <Button
+                android:id="@+id/gobackBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/custom_input_design"
+                android:text="Go back"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -38,16 +38,7 @@ public class Product {
 
     }
 
-    public void setProductID(String vBookID){
-        this.productID = vBookID;
-    }
-    public void setProductName(String author){
-        this.productName = author;
-    }
 
-    public void setProductDescription(String title) {
-        this.productDescription = title;
-    }
     // to check duplicate books in the list comparing by id
     @Override
     public boolean equals(Object o) {

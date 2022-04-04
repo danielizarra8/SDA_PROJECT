@@ -130,23 +130,28 @@
 
         <Button
             android:id="@+id/verifyBtn"
-            android:layout_width="150dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="168dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="392dp"
+            android:background="@drawable/btn_selector"
             android:text="Veify Email"
+            android:textColor="@color/tabTextColor"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.254"
-            app:layout_constraintStart_toStartOf="@+id/verifyMessage"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/verifyMessage"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
             android:background="@drawable/fui_idp_button_background_github"
+            android:fontFamily="@font/ubuntu_light"
+            android:textAllCaps="true"
             android:text="Unverified Email!"
             android:textAlignment="center"
             android:textColor="@color/design_default_color_error"
@@ -156,6 +161,39 @@
             app:layout_constraintHorizontal_bias="0.135"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/loginMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26sp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:background="@drawable/fui_idp_button_background_github"
+        android:fontFamily="@font/ubuntu_light"
+        android:text="You need sign in first!"
+        android:textAllCaps="true"
+        android:textAlignment="center"
+        android:textColor="@color/design_default_color_error"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.135"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="392dp"
+        android:background="@drawable/btn_selector"
+        android:text="Sign in"
+        android:textColor="@color/tabTextColor"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/profileIcon"

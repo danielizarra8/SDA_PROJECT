@@ -8,9 +8,9 @@ public class Cart {
     private String productID, productName;
     private int price, quantity;
 
-    public Cart(String productID, String productName, int price, int quantity) {
+    public Cart(String productID, String pruductName, int price, int quantity) {
         this.productID = productID;
-        this.productName = productName;
+        this.productName = pruductName;
         this.price = price;
         this.quantity = quantity;
     }
@@ -30,7 +30,7 @@ public class Cart {
     }
 
     public String getProductName() {
-        return productName;
+        return getProductName();
     }
 
     public int getPrice() {

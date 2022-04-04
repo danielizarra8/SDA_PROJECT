@@ -2,25 +2,15 @@ package com.example.sdaassign4_2021;
 
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.util.Log;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-import androidx.annotation.NonNull;
+
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.stripe.android.paymentsheet.PaymentSheet;
-import com.stripe.android.paymentsheet.PaymentSheetResult;
-import okhttp3.*;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.io.IOException;
 
-public class CheckoutActivityJava extends AppCompatActivity {
+public class CartPayment extends AppCompatActivity {
 
     private static final String TAG = "CheckoutActivity";
     private static final String BACKEND_URL = "http://10.0.2.2:4242";
@@ -42,10 +32,8 @@ public class CheckoutActivityJava extends AppCompatActivity {
         //payButton.setEnabled(false);
 /*
         paymentSheet = new PaymentSheet(this, this::onPaymentSheetResult);
-
         fetchPaymentIntent();
     }
-
     private void showAlert(String title, @Nullable String message) {
         runOnUiThread(() -> {
             AlertDialog dialog = new AlertDialog.Builder(this)
@@ -56,24 +44,19 @@ public class CheckoutActivityJava extends AppCompatActivity {
             dialog.show();
         });
     }
-
     private void showToast(String message) {
         runOnUiThread(() -> Toast.makeText(this, message, Toast.LENGTH_LONG).show());
     }
-
     private void fetchPaymentIntent() {
         final String shoppingCartContent = "{\"items\": [ {\"id\":\"xl-tshirt\"}]}";
-
         final RequestBody requestBody = RequestBody.create(
                 MediaType.parse("application/json; charset=utf-8"),
                 shoppingCartContent
                 );
-
         Request request = new Request.Builder()
                 .url(BACKEND_URL + "/create-payment-intent")
                 .post(requestBody)
                 .build();
-
         new OkHttpClient()
                 .newCall(request)
                 .enqueue(new Callback() {
@@ -81,7 +64,6 @@ public class CheckoutActivityJava extends AppCompatActivity {
                     public void onFailure(@NonNull Call call, @NonNull IOException e) {
                         showAlert("Failed to load data", "Error: " + e.toString());
                     }
-
                     @Override
                     public void onResponse(
                             @NonNull Call call,
@@ -100,7 +82,6 @@ public class CheckoutActivityJava extends AppCompatActivity {
                         }
                     }
                 });
-
  */
     }
 /*
@@ -112,7 +93,6 @@ public class CheckoutActivityJava extends AppCompatActivity {
                 Log.e(TAG, "Error parsing response", e);
             }
         }
-
         return new JSONObject();
     }
  */
@@ -120,17 +100,15 @@ public class CheckoutActivityJava extends AppCompatActivity {
     private void onPayClicked(View view) {
         /*
         PaymentSheet.Configuration configuration = new PaymentSheet.Configuration("Example, Inc.");
-
         // Present Payment Sheet
         paymentSheet.presentWithPaymentIntent(paymentIntentClientSecret, configuration);
-
          */
         // edited*****
         Intent reviewOrderIntent = new Intent();
         boolean cardAccepted = true;
         reviewOrderIntent.putExtra("card_status", cardAccepted);
         setResult(78, reviewOrderIntent);
-        CheckoutActivityJava.super.onBackPressed();
+        CartPayment.super.onBackPressed();
     }
 /*
     private void onPaymentSheetResult(
@@ -145,6 +123,5 @@ public class CheckoutActivityJava extends AppCompatActivity {
             showAlert("Payment failed", error.getLocalizedMessage());
         }
     }
-
  */
 }

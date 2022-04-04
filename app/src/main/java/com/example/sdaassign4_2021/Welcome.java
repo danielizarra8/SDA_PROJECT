@@ -18,9 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 
 
 /**
@@ -33,11 +36,15 @@ public class Welcome extends Fragment {
     private static final String USER_DATA_KEY = "USER_DATA_KEY";
     private static final String USER_NAME_KEY = "USER_NAME_KEY";
     private static final String USER_EMAIL_KEY = "USER_EMAIL_KEY";
-    private static final String USER_PASSWORD_KEY = "USER_PASSWORD_KEY";
+    private static final String USER_LOGGED_IN = "USER_LOGGED_IN";
 
     private Button mSignInBtn, mSignUpBtn;
     TextView mWelcomeText;
     FirebaseAuth fAuth;
+
+    private SharedPreferences prefs;
+    private String userName,userEmail;
+    private boolean isUserLoggedIn;
 
     public Welcome() {
         // Required empty public constructor
@@ -46,28 +53,28 @@ public class Welcome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final SharedPreferences prefs = getActivity().getSharedPreferences(USER_DATA_KEY, Context.MODE_PRIVATE);
-        final String userEmail = prefs.getString(USER_EMAIL_KEY,"");
-        final String userPassword = prefs.getString(USER_PASSWORD_KEY,"");
-        String prefsName = prefs.getString(USER_NAME_KEY,"");
-
-        if(userEmail != "" && userPassword != ""){
-            if(!TextUtils.isEmpty(userEmail) && !TextUtils.isEmpty(userPassword)){
-                LoginUser(userEmail, userPassword);
-            }
-        }
 
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_wellcome, container, false);
-
-        fAuth = FirebaseAuth.getInstance();
 
         mWelcomeText = root.findViewById(R.id.welcomeTextUser);
         mSignInBtn = root.findViewById(R.id.signInBtn);
         mSignUpBtn = root.findViewById(R.id.signUpBtn);
 
+        prefs = getActivity().getSharedPreferences(USER_DATA_KEY, Context.MODE_PRIVATE);
+        userEmail = prefs.getString(USER_EMAIL_KEY,"");
+        userName = prefs.getString(USER_NAME_KEY,"");
+        isUserLoggedIn = prefs.getBoolean(USER_LOGGED_IN,false);
+        //init the firestore auth module
+        fAuth = FirebaseAuth.getInstance();
+        //get user password (use token instead of saving password in an intent)
+        String password = prefs.getString("user_pw","");
+        //call LoginUser method if user has set the kept signed in option
+        if(!TextUtils.isEmpty(userEmail) && isUserLoggedIn == false){
+                LoginUser(userEmail,password);
+        }
+        //check user is signed in, otherwise ask to sign in or register
         if(fAuth.getCurrentUser() == null) {
-
             //open the signin activity
             mSignInBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -86,7 +93,7 @@ public class Welcome extends Fragment {
         else{
             mSignInBtn.setVisibility(getView().GONE);
             mSignUpBtn.setVisibility(getView().GONE);
-            String nameTxtView = mWelcomeText.getText().toString() + " " + prefsName;
+            String nameTxtView = mWelcomeText.getText().toString() + ", " + userName;
             mWelcomeText.setText(nameTxtView);
             mWelcomeText.setVisibility(getView().VISIBLE);
 
@@ -106,5 +113,6 @@ public class Welcome extends Fragment {
             }
         });
     }
+
 
 }

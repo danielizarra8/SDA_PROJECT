@@ -22,7 +22,7 @@ import com.stripe.android.PaymentConfiguration;
  * @author      Adapted by Rafael Izarra (rafael.izarra2@mail.dcu.ie)
  */
 public class MainActivity extends AppCompatActivity {
-    public static final int BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT = 1;
+   public static final int BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT = 1;
     ViewPager viewPager;
     ImageView settings;
     @Override
@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_baseline_home_24);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_baseline_store_24);
-        //tabLayout.getTabAt(2).setIcon(R.drawable.ic_baseline_settings_24);
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_baseline_shopping_cart_24);
 
         settings.setOnClickListener(new View.OnClickListener() {

@@ -17,12 +17,14 @@ import java.util.ArrayList;
 
 public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.ViewHolder> {
     private static final String TAG = "ViewHolder";
-    private Context mNewContext1;
+    public Context mNewContext;
     private ArrayList<Cart> mItem;
+    private ArrayList<String>mProductName, mProductID;
 
-    CartViewAdapter(Context mNewContext, ArrayList<Cart> mCart) {
-        this.mNewContext1 = mNewContext;
-        this.mItem = mCart;
+    CartViewAdapter(Context mNewContext, ArrayList<String> mProductName, ArrayList<String>mProductsID) {
+        this.mNewContext = mNewContext;
+        this.mProductName = mProductName;
+        this.mProductID = mProductsID;
     }
 
 
@@ -37,11 +39,9 @@ public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
         Log.d(TAG, "onBindViewHolder CART: was called" );
+        viewHolder.mProductNameTxt.setText(mProductName.get(position));
+        viewHolder.mProductIDTxt.setText("ID: " +mProductID.get(position));
 
-        viewHolder.mProductNameTxt.setText(mItem.get(position).getProductName());
-        viewHolder.mProductPriceTxt.setText("Amount: " + String.valueOf(mItem.get(position).getPrice() + " $"));
-        viewHolder.mProductQtyTxt.setText("Qty: " + String.valueOf(mItem.get(position).getQuantity()));
-        //viewHolder.mTotalAmountCart.setText(" ");
     }
     @Override
     public long getItemId(int position) {
@@ -55,20 +55,18 @@ public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return mItem.size();
+        return mProductName.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView mProductNameTxt, mProductPriceTxt, mProductQtyTxt, mTotalAmountCart;
+        public TextView mProductNameTxt, mProductIDTxt;
         RelativeLayout itemCartParentLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             mProductNameTxt = itemView.findViewById(R.id.productNameCart);
-            mProductPriceTxt = itemView.findViewById(R.id.productAmountCart);
-            mProductQtyTxt = itemView.findViewById(R.id.productQtyCart);
-            mTotalAmountCart = itemView.findViewById(R.id.cart_totalAmount);
+            mProductIDTxt = itemView.findViewById(R.id.productIdCart);
             itemCartParentLayout = itemView.findViewById(R.id.cartListItem);
         }
     }

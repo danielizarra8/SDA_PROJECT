@@ -39,7 +39,7 @@
     <EditText
         android:id="@+id/editTextPersonName"
         android:layout_width="377dp"
-        android:layout_height="37dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
@@ -58,7 +58,7 @@
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="377dp"
-        android:layout_height="37dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -78,7 +78,7 @@
     <EditText
         android:id="@+id/password"
         android:layout_width="377dp"
-        android:layout_height="37dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -112,7 +112,7 @@
     <EditText
         android:id="@+id/editTextPhone"
         android:layout_width="377dp"
-        android:layout_height="37dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
@@ -134,7 +134,9 @@
         android:layout_width="280dp"
         android:layout_height="42dp"
         android:layout_marginTop="44dp"
+        android:paddingTop="5dp"
         android:ems="10"
+        android:background="@drawable/custom_input_design"
         android:inputType="textPersonName"
         android:text="Already Registered? Login here!"
         android:textAlignment="center"
@@ -158,9 +160,10 @@
     <EditText
         android:id="@+id/password2"
         android:layout_width="377dp"
-        android:layout_height="37dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@color/tabTextColor"
         android:ems="10"
         android:fontFamily="@font/aclonica"
@@ -169,16 +172,16 @@
         android:padding="10dp"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <EditText
         android:id="@+id/editTextTextAddress"
         android:layout_width="377dp"
-        android:layout_height="37dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@color/tabTextColor"
         android:ems="10"
         android:fontFamily="@font/aclonica"
