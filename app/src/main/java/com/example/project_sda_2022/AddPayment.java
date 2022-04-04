@@ -1,8 +1,10 @@
-package com.example.sdaassign4_2021;
+package com.example.project_sda_2022;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.project_sda_2022.R;
 
 public class AddPayment extends AppCompatActivity {
 

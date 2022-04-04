@@ -1,4 +1,4 @@
-package com.example.sdaassign4_2021;
+package com.example.project_sda_2022;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -18,10 +18,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.common.reflect.TypeToken;
-import com.google.gson.Gson;
+import com.example.project_sda_2022.R;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -55,7 +53,6 @@ public class CartActivity extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_cart, container, false);
-
 
         //share preferences
         totalPrefs = getActivity().getSharedPreferences(CART_KEY, Context.MODE_PRIVATE);

@@ -1,4 +1,4 @@
-package com.example.sdaassign4_2021;
+package com.example.project_sda_2022;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,11 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.project_sda_2022.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
 
 public class ViewOrder extends AppCompatActivity {
 

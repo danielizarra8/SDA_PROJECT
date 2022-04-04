@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundmain"
     android:fillViewport="true"
-    tools:context=".Welcome">
+    tools:context="com.example.project_sda_2022.Welcome">
 
 
     <Button

@@ -1,4 +1,4 @@
-package com.example.sdaassign4_2021;
+package com.example.project_sda_2022;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.project_sda_2022.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,13 +22,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.SignInMethodQueryResult;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +44,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        // init ui var
         mFullName = findViewById(R.id.editTextPersonName);
         mEmail = findViewById(R.id.editTextEmail);
         mPhone = findViewById(R.id.editTextPhone);
@@ -63,7 +59,6 @@ public class Register extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
 
         //Check if user is already log in, if so, send it to the main activity.
-       // if(fAuth.getCurrentUser() !=null) {
 
             mRegisterBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -75,7 +70,7 @@ public class Register extends AppCompatActivity {
                     String address = mAddress.getText().toString();
                     String password = mPassword.getText().toString().trim();
                     String password2 = mPassword2.getText().toString().trim();
-                    //TextUtils class has a method that let us check for empty strings
+                    //validating user input before creating the user.
                     if (TextUtils.isEmpty(email)) {
                         mEmail.setError("Email is Required!");
                         return;
@@ -155,13 +150,6 @@ public class Register extends AppCompatActivity {
 
                 }
             });
-            /*
-        }else{
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-            finish();
-        }
-
-             */
 
         //calling login activity
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
@@ -171,6 +159,5 @@ public class Register extends AppCompatActivity {
             }
         });
     }
-
 
 }

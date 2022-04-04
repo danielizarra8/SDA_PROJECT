@@ -1,4 +1,4 @@
-package com.example.sdaassign4_2021;
+package com.example.project_sda_2022;
 
         /*
          * Copyright (C) 2016 The Android Open Source Project
@@ -16,12 +16,10 @@ package com.example.sdaassign4_2021;
          * limitations under the License.
          */
 
-        import android.app.AlertDialog;
         import android.content.Context;
         import android.content.Intent;
         import android.content.SharedPreferences;
         import android.graphics.Color;
-        import android.os.Parcelable;
         import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
@@ -35,6 +33,7 @@ package com.example.sdaassign4_2021;
         import androidx.recyclerview.widget.RecyclerView;
 
         import com.bumptech.glide.Glide;
+        import com.example.project_sda_2022.R;
 
         import java.util.ArrayList;
 

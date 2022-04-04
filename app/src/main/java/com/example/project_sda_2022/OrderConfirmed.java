@@ -1,4 +1,4 @@
-package com.example.sdaassign4_2021;
+package com.example.project_sda_2022;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -8,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import android.app.Activity;
-import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -28,25 +26,16 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.print.PrintDocumentInfo;
-import android.print.pdf.PrintedPdfDocument;
 import android.graphics.pdf.PdfDocument;
-import com.google.firebase.firestore.DocumentReference;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
+
+import com.example.project_sda_2022.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
 
 public class OrderConfirmed extends AppCompatActivity {
 
@@ -100,7 +89,6 @@ public class OrderConfirmed extends AppCompatActivity {
                 "TOTAL AMOUNT:  " + totalAmount + "\n \n" +
                 "Thank you for shopping with Macys!");
 
-
         mDownloadPDFBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,7 +98,6 @@ public class OrderConfirmed extends AppCompatActivity {
             ///
             }
         });
-
 
         mGoBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +120,6 @@ public class OrderConfirmed extends AppCompatActivity {
         view.draw(canvas);
         return bitmap;
     }
-
 
     private void createPDF(){
         WindowManager windowManager = (WindowManager)getSystemService(Context.WINDOW_SERVICE);

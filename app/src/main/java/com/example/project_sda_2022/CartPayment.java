@@ -1,4 +1,4 @@
-package com.example.sdaassign4_2021;
+package com.example.project_sda_2022;
 
 
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.project_sda_2022.R;
 import com.stripe.android.paymentsheet.PaymentSheet;
 
 public class CartPayment extends AppCompatActivity {

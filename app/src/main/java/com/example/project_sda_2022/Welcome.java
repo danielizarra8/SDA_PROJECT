@@ -1,4 +1,4 @@
-package com.example.sdaassign4_2021;
+package com.example.project_sda_2022;
 
 
 import android.content.Context;
@@ -17,13 +17,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.project_sda_2022.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GetTokenResult;
 
 
 /**
@@ -52,8 +50,6 @@ public class Welcome extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_wellcome, container, false);
 
@@ -62,6 +58,7 @@ public class Welcome extends Fragment {
         mSignUpBtn = root.findViewById(R.id.signUpBtn);
 
         prefs = getActivity().getSharedPreferences(USER_DATA_KEY, Context.MODE_PRIVATE);
+
         userEmail = prefs.getString(USER_EMAIL_KEY,"");
         userName = prefs.getString(USER_NAME_KEY,"");
         isUserLoggedIn = prefs.getBoolean(USER_LOGGED_IN,false);

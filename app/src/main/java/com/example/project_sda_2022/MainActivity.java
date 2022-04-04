@@ -1,18 +1,14 @@
-package com.example.sdaassign4_2021;
+package com.example.project_sda_2022;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.project_sda_2022.R;
 import com.google.android.material.tabs.TabLayout;
 import com.stripe.android.PaymentConfiguration;
 

@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/background_settings"
         android:fillViewport="true"
-        tools:context=".Settings">
+        tools:context="com.example.project_sda_2022.Settings">
 
     <Button
         android:id="@+id/logoutBtn"

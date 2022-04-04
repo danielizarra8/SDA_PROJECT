@@ -1,6 +1,5 @@
-package com.example.sdaassign4_2021;
+package com.example.project_sda_2022;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -17,6 +16,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.example.project_sda_2022.R;
 
 public class ProductDisplay extends AppCompatActivity {
     private final static String CART_KEY = "CART_KEY";

@@ -1,4 +1,4 @@
-package com.example.sdaassign4_2021;
+package com.example.project_sda_2022;
 
 
 import android.net.Uri;
@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.project_sda_2022.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -34,11 +35,8 @@ import java.util.ArrayList;
  * @author Edited by Rafael Izarra 2022
  */
 public class ProductActivity extends Fragment {
-
     //declare variables, database and widgets
-
     private ArrayList<Product> mProduct = new ArrayList<>();
-    private ArrayList<String>mProductName = new ArrayList<>();
 
     StorageReference imageRef;
     StorageReference storageReference;
@@ -64,12 +62,10 @@ public class ProductActivity extends Fragment {
         dbRef = FirebaseFirestore.getInstance();
         getBookData();
 
-
         RecyclerView recyclerView = root.findViewById(R.id.productView_view);
         recyclerViewAdapter = new ProductViewAdapter(getContext(), mProduct);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
 
         return root;
     }

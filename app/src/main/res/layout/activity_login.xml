@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/candyfield"
     android:visibility="visible"
-    tools:context=".Login">
+    tools:context="com.example.project_sda_2022.Login">
 
     <TextView
         android:id="@+id/title"

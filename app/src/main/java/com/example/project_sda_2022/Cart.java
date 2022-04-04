@@ -1,7 +1,5 @@
-package com.example.sdaassign4_2021;
+package com.example.project_sda_2022;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Objects;
 
 public class Cart {
