@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,6 +52,7 @@ public class Login extends AppCompatActivity {
     FirebaseFirestore fStore;
     String name, address, phone, userID;
     SharedPreferences prefs;
+    boolean rememberUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +108,6 @@ public class Login extends AppCompatActivity {
                             //retrieve the current user id.
                             userID = fAuth.getCurrentUser().getUid();
                             // saving user's details in preferences if the user wants to keep logged in.
-                            if (checkBoxRemember.isChecked()) {
                                 //retrieve data (phone,email,name) using DocumentReference from the firestore db associated with the user is.
                                 DocumentReference documentReference = fStore.collection("users").document(userID);
                                 documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -115,16 +116,15 @@ public class Login extends AppCompatActivity {
                                         name = (documentSnapshot.getString("name"));
                                         address = (documentSnapshot.getString("address"));
                                         phone = (documentSnapshot.getString("phone"));
-                                        saveDetailsSharePreferences(
-                                                documentSnapshot.getString("name"),
-                                                documentSnapshot.getString("address"),
-                                                documentSnapshot.getString("phone"),
-                                                email,
-                                                userID,
-                                                password);
-                                    }
+                                            saveDetailsSharePreferences(
+                                                    documentSnapshot.getString("name"),
+                                                    documentSnapshot.getString("address"),
+                                                    documentSnapshot.getString("phone"),
+                                                    email,
+                                                    userID,
+                                                    password);
+                                        }
                                 });
-                            }
                             Toast.makeText(Login.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }else{

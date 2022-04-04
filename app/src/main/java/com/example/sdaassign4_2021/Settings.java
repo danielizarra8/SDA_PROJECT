@@ -43,7 +43,7 @@ public class Settings extends AppCompatActivity {
     SharedPreferences userPrefs;
 
     TextView name, email, address, phone, verifyMessage, mLoginMessage;
-    Button mLogoutBtn, mVerifyBtn, mChangePwdBtn, mLoginBtn;
+    Button mLogoutBtn, mVerifyBtn, mChangePwdBtn, mLoginBtn, mViewOrder;
     String userID;
 
     FirebaseAuth fAuth;
@@ -58,6 +58,7 @@ public class Settings extends AppCompatActivity {
 
             mChangePwdBtn = findViewById(R.id.changePwdBtn);
             mLogoutBtn = findViewById(R.id.logoutBtn);
+            mViewOrder = findViewById(R.id.viewOrderBtm);
 
             // display data if user is logged in otherwise display empty fields
             if(fAuth.getCurrentUser() !=null) {
@@ -150,7 +151,6 @@ public class Settings extends AppCompatActivity {
                         passwordResetDialog.create().show();
                     }
                 });
-
                 //logout the user and redirect it to the login page
                 mLogoutBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -158,6 +158,15 @@ public class Settings extends AppCompatActivity {
                         userPrefs.edit().clear().apply();
                         FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(getApplicationContext(), Login.class));
+                    }
+                });
+                //view previous orders
+                mViewOrder.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent viewOrderIntent = new Intent(getApplicationContext(), ViewOrder.class);
+                        viewOrderIntent.putExtra("userID", userID);
+                        startActivity(viewOrderIntent);
                     }
                 });
             }else{

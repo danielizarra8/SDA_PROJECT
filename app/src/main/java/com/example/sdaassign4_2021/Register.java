@@ -147,6 +147,7 @@ public class Register extends AppCompatActivity {
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             } else {
                                 Toast.makeText(Register.this, "There was an error creating the user! - " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                mEmail.setError(task.getException().getMessage());
                                 progressBar.setVisibility(View.GONE);
                             }
                         }

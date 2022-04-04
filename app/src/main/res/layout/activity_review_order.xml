@@ -156,7 +156,7 @@
                     android:textColor="@color/tabTextColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Add cart" />
+                    android:text="Add card" />
 
                 <ImageView
                     android:id="@+id/cartCheckedIcon"

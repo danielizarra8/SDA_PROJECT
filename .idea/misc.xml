@@ -29,6 +29,7 @@
         <entry key="app/src/main/res/layout/activity_product_display.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_review_order.xml" value="0.29449423815621" />
+        <entry key="app/src/main/res/layout/activity_view_order.xml" value="0.1109375" />
         <entry key="app/src/main/res/layout/activity_view_page_adapter2.xml" value="0.24010416666666667" />
         <entry key="app/src/main/res/layout/cart_list_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_book_list.xml" value="0.21195652173913043" />

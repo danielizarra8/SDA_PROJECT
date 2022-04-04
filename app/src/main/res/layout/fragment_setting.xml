@@ -11,33 +11,31 @@
         android:fillViewport="true"
         tools:context=".Settings">
 
-        <Button
-            android:id="@+id/logoutBtn"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="392dp"
-            android:background="@drawable/btn_selector"
-            android:text="Logout"
-            android:textColor="@color/tabTextColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.504"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/btn_selector"
+        android:text="Logout"
+        android:textColor="@color/tabTextColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/addressProfile" />
 
-        <Button
-            android:id="@+id/changePwdBtn"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/btn_selector"
-            android:text="Reset Password"
-            android:textColor="@color/tabTextColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.504"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logoutBtn" />
+    <Button
+        android:id="@+id/changePwdBtn"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="72dp"
+        android:background="@drawable/btn_selector"
+        android:text="Reset Password"
+        android:textColor="@color/tabTextColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/addressProfile" />
 
-        <TextView
+    <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -235,5 +233,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileIcon" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/viewOrderBtm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:background="@drawable/custom_input_design"
+        android:text="my orders"
+        android:fontFamily="@font/ubuntu_light"
+        android:textStyle="bold"
+        android:textColor="@color/tCustom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoutBtn" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -46,7 +48,6 @@ public class ReviewOrder extends AppCompatActivity {
     private static final String USER_ADDRESS_KEY = "USER_ADDRESS_KEY";
     private static final String CART_PRODUCTID_LIST_KEY = "CART_PRODUCTID_LIST_KEY";
 
-
     String TAG1="Checkout";
     FirebaseFirestore dbRef = null;
 
@@ -55,13 +56,12 @@ public class ReviewOrder extends AppCompatActivity {
     Button sendOrderButton, setDateButton, mAddCardButton, mChangeAddressBtn;
     Calendar mDateAndTime = Calendar.getInstance();
     DocumentReference docRef;
-    String totalAmount, totalQty, userID, userName, userAddress, userPhone;
+    String totalAmount, totalQty, userID, userName, userAddress, userPhone, orderID;
     ImageView checkedIcon;
     EditText mChangeAddress;
     SharedPreferences totalPrefs, userPrefs, productPrefs;
     int totalOrderAmount, cartTotalAmount, cartTotalQty;
     private int delivery_fee = 3;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +72,6 @@ public class ReviewOrder extends AppCompatActivity {
         userPrefs = getSharedPreferences(USER_DATA_KEY, Context.MODE_PRIVATE);
         productPrefs = getSharedPreferences(CART_PRODUCTID_LIST_KEY, Context.MODE_PRIVATE);
         totalPrefs = getSharedPreferences(CART_KEY, MODE_PRIVATE);
-
 
         //instantiate the widgets variables
         checkedIcon = findViewById(R.id.cartCheckedIcon);
@@ -152,7 +151,6 @@ public class ReviewOrder extends AppCompatActivity {
         //load user data to the ui
         loadUserData();
 
-
         //instantiate the firsetose database and get the data getData()
         dbRef = FirebaseFirestore.getInstance();
     }
@@ -219,26 +217,30 @@ public class ReviewOrder extends AppCompatActivity {
         //create collection with required fields; currentdate,duedate,bookid and userid
         Map<String , Object>orderDates = new HashMap<>();
         Date currentDate  = mDateAndTime.getTime();
+        // five days delivery expectation
         mDateAndTime.add(Calendar.DAY_OF_MONTH,5);
         Date dueDate = mDateAndTime.getTime();
         orderDates.put("currentDate", currentDate);
         orderDates.put("dueDate", dueDate);
         orderDates.put("customerID",userID);
         orderDates.put("customerName",userName);
+        orderDates.put("orderAmount", totalOrderAmount);
+        orderDates.put("orderQty",totalQty);
         docRef = dbRef.collection("orders").document();
-        docRef.set(orderDates).addOnCompleteListener(new OnCompleteListener<Void>() {
+        docRef.set(orderDates).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-            sendOrderButton.setEnabled(false);
+            public void onSuccess(Void unused) {
+                sendOrderButton.setEnabled(false);
+                orderID = docRef.getId();
+                inserDateDB(orderID);
             }
         });
     }
-
-    private void inserDateDB(String selectedDate){
+    private void inserDateDB(String orderID){
         //this method simply update the books document with a new field orderDate
-        docRef = dbRef.collection("books").document("1");
+        docRef = dbRef.collection("users").document(userID);
         Map<String, Object>data = new HashMap<>();
-        data.put("orderDate", selectedDate);
+        data.put("orderID", orderID);
         docRef.set(data, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
