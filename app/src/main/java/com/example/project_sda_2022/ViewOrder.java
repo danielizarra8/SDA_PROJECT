@@ -15,6 +15,12 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+/**
+ * ViewOrder retrieve previous order made by the user
+ *  * @author Rafael Izarra
+ *  * @version 1.0
+ *  * @since 02/04/2022
+ */
 public class ViewOrder extends AppCompatActivity {
 
     FirebaseFirestore fStore;

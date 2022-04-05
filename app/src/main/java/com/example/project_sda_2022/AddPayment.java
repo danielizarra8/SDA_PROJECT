@@ -6,6 +6,12 @@ import android.os.Bundle;
 
 import com.example.project_sda_2022.R;
 
+/**
+ *  * @author Rafael Izarra
+ *  * @version 1.0
+ *  * @since 30/03/2022
+ */
+
 public class AddPayment extends AppCompatActivity {
 
     @Override

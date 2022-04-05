@@ -12,6 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.project_sda_2022.R;
 import com.stripe.android.paymentsheet.PaymentSheet;
 
+/**
+ * Sample taken from Stripe to integrate Stripe pay api
+ * the code for the api does not work
+ *  * @author Rafael Izarra
+ *  * @version 1.0
+ *  * @since 29/03/2022
+ */
+
 public class CartPayment extends AppCompatActivity {
 
     private static final String TAG = "CheckoutActivity";
@@ -105,7 +113,6 @@ public class CartPayment extends AppCompatActivity {
         // Present Payment Sheet
         paymentSheet.presentWithPaymentIntent(paymentIntentClientSecret, configuration);
          */
-        // edited*****
         Intent reviewOrderIntent = new Intent();
         boolean cardAccepted = true;
         reviewOrderIntent.putExtra("card_status", cardAccepted);

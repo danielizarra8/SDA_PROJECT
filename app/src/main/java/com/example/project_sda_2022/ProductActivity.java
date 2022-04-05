@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.project_sda_2022.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -27,12 +26,9 @@ import java.util.ArrayList;
 
 
 /**
- * Images used are sourced from Public Domain Day 2019.
- * by Duke Law School's Center for the Study of the Public Domain
- * is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.
+ * ProductActivity retrieve the product data and display it to the ui
  * A simple {@link Fragment} subclass.
- * @author Chris Coughlan
- * @author Edited by Rafael Izarra 2022
+ * @author Rafael Izarra 2022
  */
 public class ProductActivity extends Fragment {
     //declare variables, database and widgets
@@ -60,7 +56,7 @@ public class ProductActivity extends Fragment {
 
         //instantiate the database and call the getBookData() method to retireve book's data
         dbRef = FirebaseFirestore.getInstance();
-        getBookData();
+        getProductData();
 
         RecyclerView recyclerView = root.findViewById(R.id.productView_view);
         recyclerViewAdapter = new ProductViewAdapter(getContext(), mProduct);
@@ -70,7 +66,13 @@ public class ProductActivity extends Fragment {
         return root;
     }
 
-    public void getBookData() {
+    /**
+     * Access the firabeseStorage
+     * gets a referencer for the product collection
+     * and pass the data to the recyclerview
+     */
+
+    public void getProductData() {
         // get the storage reference from firebase where images are stored
         storageReference = FirebaseStorage.getInstance().getReference();
 

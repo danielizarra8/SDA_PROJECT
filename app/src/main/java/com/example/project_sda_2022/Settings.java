@@ -26,9 +26,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 
 /**
-
- * @author Edited by Rafael Izarra 2022
- *
+ * Setting class user can review their information
+ * User can reser password
+ * User can review previous order
+ * User can sign out
+ * Rafael Izarra 2022
+ *  * @version 1.0
+ *  * @since 30/03/2022
  *
  */
 public class Settings extends AppCompatActivity {

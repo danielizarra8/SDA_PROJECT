@@ -37,6 +37,15 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+/**
+ * The Orderconirm class implments an application that confirm the order to the user,
+ *  it displays a summary message and the invoice to the user
+ *  user can download the invoice to the /download directory as a pdf file
+ *  * @author Rafael Izarra
+ *  * @version 1.0
+ *  * @since 30/03/2022
+ */
+
 public class OrderConfirmed extends AppCompatActivity {
 
     public  TextView mOrderSummary, mCustomerName, mCustomerID, mCurrentDateOrder,

@@ -26,6 +26,11 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
+ *
+ * CartActivity fragment display products using a recycler view
+ * @author Rafael Izarra
+ * @version 1.0
+ * @since 30/03/2022
  */
 public class CartActivity extends Fragment {
 
@@ -34,7 +39,6 @@ public class CartActivity extends Fragment {
     private static final String USER_DATA_KEY = "USER_DATA_KEY";
     private static final String USER_LOGGED_IN = "USER_LOGGED_IN";
 
-    private ArrayList<Cart> mItem = new ArrayList<>();
     RecyclerView recyclerView;
     public TextView mProductNameTxt, mTotalAmountCart;
     CartViewAdapter recyclerViewAdapter;
@@ -102,6 +106,11 @@ public class CartActivity extends Fragment {
         return root;
     }
 
+    /**check the user stare taken from sharepreferences
+     *
+     * @return the state of the user if user is logged in or not
+     */
+
     private boolean checkUserStatus() {
         boolean isUserLogged = userPrefs.getBoolean(USER_LOGGED_IN, false);
         if (isUserLogged == true){
@@ -117,6 +126,10 @@ public class CartActivity extends Fragment {
         }
     }
 
+    /**
+     * get the data in the cart sharepreferences and load it to the ui
+     * data is passed to the recylew view to load the data
+     */
     public void getCartData() {
         int cartTotalQty = totalPrefs.getInt("cart_qty",0);
         int cartTotalAmount = totalPrefs.getInt("cart_amount",0);
@@ -133,6 +146,11 @@ public class CartActivity extends Fragment {
         mTotalCartQtyTxt.setText("Products = " + cartTotalQty);
     }
 
+    /**
+     * Checks the state of cart sharepreferences whether is empty or not and return it
+     * back to the user
+     * @return status of the cart
+     */
     private boolean checkCartStatus() {
         int isCartEmpty = totalPrefs.getInt("cart_qty",0);
         if (isCartEmpty != 0){

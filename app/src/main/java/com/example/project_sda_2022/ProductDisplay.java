@@ -18,6 +18,13 @@ import com.bumptech.glide.Glide;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.project_sda_2022.R;
 
+/**
+ * ProductDisplay class takes the user selection (product) and display it individually
+ *  * @author Rafael Izarra
+ *  * @version 1.0
+ *  * @since 30/03/2022
+ */
+
 public class ProductDisplay extends AppCompatActivity {
     private final static String CART_KEY = "CART_KEY";
     private static final String CART_PRODUCTID_LIST_KEY = "CART_PRODUCTID_LIST_KEY";
@@ -162,7 +169,15 @@ public class ProductDisplay extends AppCompatActivity {
             mAddCartBtn.setVisibility(View.GONE);
         }
     }
-    // add total amount and total quantity of items
+
+    /**
+     * Gets the previous amount and add it to the new product added by the user
+     * @param qty quantity of the product
+     * @param price price of the procut
+     * @param totalCartAmount the sumup of all products amount
+     * @param userID id of the user
+     * add total amount and total quantity of items
+     * */
     private void addTotalCart(int qty, int price, int totalCartAmount, String userID) {
         int cartQty = qty + Integer.valueOf(numberButton.getNumber());
         int cartTotal = (price * Integer.valueOf(numberButton.getNumber())) + totalCartAmount;

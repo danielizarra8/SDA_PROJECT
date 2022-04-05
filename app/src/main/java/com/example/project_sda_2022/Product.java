@@ -1,7 +1,7 @@
 package com.example.project_sda_2022;
 
 import java.util.Objects;
-/*
+/**
  * @author Created by Rafael Izarra 2022
  *
  * A ViewAdapter class using RecycleView

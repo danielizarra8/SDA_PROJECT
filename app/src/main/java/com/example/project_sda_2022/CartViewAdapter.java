@@ -16,11 +16,17 @@ import com.example.project_sda_2022.R;
 
 import java.util.ArrayList;
 
+/**
+ * Cardview Adapter to load the data to the ui
+ *
+ *  * @author Rafael Izarra
+ *  * @version 1.0
+ *  * @since 30/03/2022
+ */
 
 public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.ViewHolder> {
     private static final String TAG = "ViewHolder";
     public Context mNewContext;
-    private ArrayList<Cart> mItem;
     private ArrayList<String>mProductName, mProductID;
 
     CartViewAdapter(Context mNewContext, ArrayList<String> mProductName, ArrayList<String>mProductsID) {

@@ -30,6 +30,14 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.rey.material.widget.CheckBox;
 
+/**
+ * Login class implements an application that presents the user a field to enter
+ * email and password to loggin
+ *  * @author Rafael Izarra
+ *  * @version 1.0
+ *  * @since 30/03/2022
+ */
+
 public class Login extends AppCompatActivity {
     // Instance of variable required in the activity
     private static final String USER_EMAIL_KEY = "USER_EMAIL_KEY";
@@ -39,7 +47,6 @@ public class Login extends AppCompatActivity {
     private static final String USER_ID_KEY = "USER_ID_KEY";
     private static final String USER_PHONE_KEY = "USER_PHONE_KEY";
     private static final String USER_ADDRESS_KEY = "USER_ADDRESS_KEY";
-    SharedPreferences userPrefs;
 
     EditText mEmail, mPassword;
     Button mLoginBtn;
@@ -51,7 +58,7 @@ public class Login extends AppCompatActivity {
     FirebaseFirestore fStore;
     String name, address, phone, userID;
     SharedPreferences prefs;
-    boolean rememberUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,6 +161,10 @@ public class Login extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @param view to access the reset email field if user choose to reset password
+     */
     private void forgotPassword(View view) {
         final EditText resetEmail = new EditText(view.getContext());
         final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(view.getContext());
@@ -190,6 +201,16 @@ public class Login extends AppCompatActivity {
 
         passwordResetDialog.create().show();
     }
+
+    /**
+     * Save user detials to sharepreferences
+     * @param name user name
+     * @param address user address
+     * @param phone user phone
+     * @param email user email
+     * @param ID user id
+     * @param password user password
+     */
     private void saveDetailsSharePreferences(String name, String address, String phone, String email, String ID, String password) {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(USER_ID_KEY,ID);

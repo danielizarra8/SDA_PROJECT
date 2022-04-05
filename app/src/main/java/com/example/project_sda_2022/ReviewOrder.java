@@ -35,8 +35,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Checkout class
- * @author Edited by Rafael Izarra 2022
+ * ReviewOrder class gives a summary to the user
+ * User can add payment
+ * User can chande delivery address
+ * User can place order
+ * @author  by Rafael Izarra 2022
  */
 
 public class ReviewOrder extends AppCompatActivity {
@@ -48,7 +51,6 @@ public class ReviewOrder extends AppCompatActivity {
     private static final String USER_ADDRESS_KEY = "USER_ADDRESS_KEY";
     private static final String CART_PRODUCTID_LIST_KEY = "CART_PRODUCTID_LIST_KEY";
 
-    String TAG1="Checkout";
     FirebaseFirestore dbRef = null;
 
     CheckBox checkBoxDelivery;
@@ -213,6 +215,11 @@ public class ReviewOrder extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * get a referenced to the orders collection
+     * and add a new order
+     */
+
     private void addOrderDB() {
         //create collection with required fields; currentdate,duedate,bookid and userid
         Map<String , Object>orderDates = new HashMap<>();
@@ -236,6 +243,11 @@ public class ReviewOrder extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * insert the orderID and link it to the user who id who placed the order
+     * @param orderID the id of the order
+     */
     private void inserDateDB(String orderID){
         //this method simply update the books document with a new field orderDate
         docRef = dbRef.collection("users").document(userID);

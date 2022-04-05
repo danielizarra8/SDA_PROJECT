@@ -16,7 +16,9 @@ import com.stripe.android.PaymentConfiguration;
  * This class is the starting point of the project
  * creates a new custom intent that broadcasts a vibration to a local BroadcastReceiver<br>
  * when the user selects a button in it's associated UI.
- * @author      Adapted by Rafael Izarra (rafael.izarra2@mail.dcu.ie)
+ * @author  Rafael Izarra (rafael.izarra2@mail.dcu.ie)
+ * @version 1.0
+ * @since 30/03/2022
  */
 public class MainActivity extends AppCompatActivity {
    public static final int BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT = 1;

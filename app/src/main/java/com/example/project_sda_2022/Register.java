@@ -28,6 +28,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Register class implements a class that display a form to the user
+ * the user must fill the the form in order to register
+ * User is register when clicked on register if the form was filled properly
+ *  * @author Rafael Izarra
+ *  * @version 1.0
+ *  * @since 30/03/2022
+ */
 public class Register extends AppCompatActivity {
 
     private static final String TAG = "UserCreationDB";
