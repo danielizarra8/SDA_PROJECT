@@ -130,7 +130,7 @@
             android:id="@+id/verifyBtn"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="392dp"
+            android:layout_marginTop="440dp"
             android:background="@drawable/btn_selector"
             android:text="Veify Email"
             android:textColor="@color/tabTextColor"

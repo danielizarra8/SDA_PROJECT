@@ -62,6 +62,8 @@ public class Settings extends AppCompatActivity {
             mChangePwdBtn = findViewById(R.id.changePwdBtn);
             mLogoutBtn = findViewById(R.id.logoutBtn);
             mViewOrder = findViewById(R.id.viewOrderBtm);
+            mLoginMessage = findViewById(R.id.loginMessage);
+            mLoginBtn = findViewById(R.id.loginBtn);
 
             // display data if user is logged in otherwise display empty fields
             if(fAuth.getCurrentUser() !=null) {
@@ -92,6 +94,10 @@ public class Settings extends AppCompatActivity {
                 if (!fUser.isEmailVerified()) {
                     verifyMessage.setVisibility(View.VISIBLE);
                     mVerifyBtn.setVisibility(View.VISIBLE);
+                    mChangePwdBtn.setVisibility(View.GONE);
+                    mLoginBtn.setVisibility(View.GONE);
+                    mViewOrder.setVisibility(View.GONE);
+                    //mLogoutBtn.setVisibility(View.GONE);
 
                     mVerifyBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -173,8 +179,6 @@ public class Settings extends AppCompatActivity {
                     }
                 });
             }else{
-                mLoginMessage = findViewById(R.id.loginMessage);
-                mLoginBtn = findViewById(R.id.loginBtn);
                 mLoginMessage.setVisibility(View.VISIBLE);
                 mLoginBtn.setVisibility(View.VISIBLE);
                 mChangePwdBtn.setVisibility(View.GONE);

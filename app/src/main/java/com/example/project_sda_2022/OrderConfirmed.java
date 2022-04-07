@@ -154,7 +154,7 @@ public class OrderConfirmed extends AppCompatActivity {
 
 
         File file;
-        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() +
+        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() +
                 "/" + fName + ".pdf");
 
         try {

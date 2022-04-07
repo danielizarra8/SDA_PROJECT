@@ -8,8 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.color1" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <style name="customTabStyle" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">10sp</item>
+    </style>
+    <style name="AppTheme.color2" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:background">@color/colorDiscussion</item>
     </style>
 
 </resources>

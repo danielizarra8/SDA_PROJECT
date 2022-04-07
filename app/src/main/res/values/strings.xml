@@ -2,16 +2,37 @@
     <string name="app_name">Macys</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="hello_ragment">One string</string>
-    <string name="images_desc">Book Thumb</string>
-    <string name="plc_author">Edgar Rice Burroughs</string>
-    <string name="plc_title">Tarzan and the Golden Lion</string>
+    <string name="image_desc">image</string>
+    <string name="product_desc">Description</string>
     <string name="border">border item</string>
     <string name="check_out">Check Out</string>
     <string name="view_product">View Product</string>
     <string name="add_product">Add Product</string>
-    <string name="library">library</string>
+    <string name="welcome_message">Welcome to Macys, </string>
+    <string name="view_order_title">My orders</string>
     <string name="title">MACYS</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="google_user_image">google user image</string>
+    <string name="username_desc">Welcome:&#160;</string>
+    <string name="email_desc">Email:&#160;</string>
+    <string name="topic_welcome">Please select a Topic below</string>
+    <string name="product_rev">Reviews</string>
+    <string name="send">Send</string>
+    <string name="enter_discussion">Enter your comment</string>
+    <string name="new_entry">new_entry</string>
+    <string name="add_new_image">add new image</string>
+    <string name="msg_token">Token message: </string>
+    <string name="review_txt">review</string>
+    <string name="title_activity_add_review">AddReview</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="add_coment">Add comment</string>
+
 
 </resources>

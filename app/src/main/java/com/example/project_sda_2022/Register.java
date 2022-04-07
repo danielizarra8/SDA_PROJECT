@@ -3,7 +3,9 @@ package com.example.project_sda_2022;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -39,6 +41,14 @@ import java.util.Map;
 public class Register extends AppCompatActivity {
 
     private static final String TAG = "UserCreationDB";
+    private static final String USER_EMAIL_KEY = "USER_EMAIL_KEY";
+    private static final String USER_LOGGED_IN = "USER_LOGGED_IN";
+    private static final String USER_DATA_KEY = "USER_DATA_KEY";
+    private static final String USER_NAME_KEY = "USER_NAME_KEY";
+    private static final String USER_ID_KEY = "USER_ID_KEY";
+    private static final String USER_PHONE_KEY = "USER_PHONE_KEY";
+    private static final String USER_ADDRESS_KEY = "USER_ADDRESS_KEY";
+    SharedPreferences userPrefs;
     //Declaration of variable for components needed to implement the registration page
     String userID;
     EditText mFullName, mEmail, mPassword, mPassword2, mAddress, mPhone;
@@ -63,6 +73,7 @@ public class Register extends AppCompatActivity {
         mLoginBtn = findViewById(R.id.loginActivity);
         progressBar = findViewById(R.id.progressBar);
 
+        userPrefs = this.getSharedPreferences(USER_DATA_KEY, Context.MODE_PRIVATE);
         fStore = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
 
@@ -133,7 +144,7 @@ public class Register extends AppCompatActivity {
                                 user.put("email", email);
                                 user.put("phone", phone);
                                 user.put("address", address);
-
+                                saveDetailsSharePreferences(fullname,address,phone,email,userID, password);
                                 //send the data to the db
                                 documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -166,6 +177,28 @@ public class Register extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),Login.class));
             }
         });
+    }
+    /**
+     * Save user detials to sharepreferences
+     * @param name user name
+     * @param address user address
+     * @param phone user phone
+     * @param email user email
+     * @param ID user id
+     * @param password user password
+     */
+    private void saveDetailsSharePreferences(String name, String address, String phone, String email, String ID, String password) {
+        if (userPrefs == null) {
+            SharedPreferences.Editor editor = userPrefs.edit();
+            editor.putString(USER_ID_KEY, ID);
+            editor.putString(USER_NAME_KEY, name);
+            editor.putString(USER_ADDRESS_KEY, address);
+            editor.putString(USER_PHONE_KEY, phone);
+            editor.putString(USER_EMAIL_KEY, email);
+            editor.putBoolean(USER_LOGGED_IN, true);
+            editor.putString("user_pw", password);
+            editor.apply();
+        }
     }
 
 }

@@ -20,7 +20,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.project_sda_2022.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -51,7 +50,7 @@ public class ReviewOrder extends AppCompatActivity {
     private static final String USER_ADDRESS_KEY = "USER_ADDRESS_KEY";
     private static final String CART_PRODUCTID_LIST_KEY = "CART_PRODUCTID_LIST_KEY";
 
-    FirebaseFirestore dbRef = null;
+    FirebaseFirestore fStore = null;
 
     CheckBox checkBoxDelivery;
     TextView mDisplaySummary, mPaymentDetails, mTotalOrderAmount, mTotalOrderQty, mDeliveryFee, mTotalAmountCart, mDeliveryAddress;
@@ -154,7 +153,7 @@ public class ReviewOrder extends AppCompatActivity {
         loadUserData();
 
         //instantiate the firsetose database and get the data getData()
-        dbRef = FirebaseFirestore.getInstance();
+        fStore = FirebaseFirestore.getInstance();
     }
 
     private void clickOnSendOrder(boolean isCardAdded) {
@@ -233,7 +232,7 @@ public class ReviewOrder extends AppCompatActivity {
         orderDates.put("customerName",userName);
         orderDates.put("orderAmount", totalOrderAmount);
         orderDates.put("orderQty",totalQty);
-        docRef = dbRef.collection("orders").document();
+        docRef = fStore.collection("orders").document();
         docRef.set(orderDates).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -250,7 +249,7 @@ public class ReviewOrder extends AppCompatActivity {
      */
     private void inserDateDB(String orderID){
         //this method simply update the books document with a new field orderDate
-        docRef = dbRef.collection("users").document(userID);
+        docRef = fStore.collection("users").document(userID);
         Map<String, Object>data = new HashMap<>();
         data.put("orderID", orderID);
         docRef.set(data, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -42,7 +42,7 @@ public class ProductActivity extends Fragment {
     String productDescription, productName;
     String id, url, url1;
 
-    FirebaseFirestore dbRef;
+    FirebaseFirestore fStore;
 
     public ProductActivity() {
         // Required empty public constructor
@@ -55,7 +55,7 @@ public class ProductActivity extends Fragment {
         View root = inflater.inflate(R.layout.fragment_product_list, container, false);
 
         //instantiate the database and call the getBookData() method to retireve book's data
-        dbRef = FirebaseFirestore.getInstance();
+        fStore = FirebaseFirestore.getInstance();
         getProductData();
 
         RecyclerView recyclerView = root.findViewById(R.id.productView_view);
@@ -77,7 +77,7 @@ public class ProductActivity extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference();
 
         //point to product collection in the database
-        dbRef.collection("products").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        fStore.collection("products").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()) {

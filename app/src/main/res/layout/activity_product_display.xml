@@ -13,7 +13,7 @@
         android:layout_height="250dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="10dp"
-        android:contentDescription="@string/images_desc" />
+        android:contentDescription="@string/image_desc" />
 
     <TextView
         android:id="@+id/productNameTxt"
@@ -155,15 +155,29 @@
         android:text="Quantity" />
 
     <TextView
-        android:id="@+id/descriptionTxt"
+        android:id="@+id/openChat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/addQtyBtn"
         android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="23dp"
+        android:fontFamily="@font/ubuntu_light"
+        android:text="@string/product_rev"
+        android:textColor="@color/tCustom"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/descriptionTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/openChat"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/ubuntu_light"
-        android:text="Description" />
+        android:text="@string/product_desc" />
 
     <TextView
         android:id="@+id/cartQty"

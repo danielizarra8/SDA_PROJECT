@@ -1,7 +1,5 @@
 package com.example.project_sda_2022;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
-import com.example.project_sda_2022.R;
 
 /**
  * ProductDisplay class takes the user selection (product) and display it individually
@@ -35,7 +34,7 @@ public class ProductDisplay extends AppCompatActivity {
     Button mCheckOutBtn, mAddCartBtn;
     ElegantNumberButton numberButton;
     ImageView mImageItem, mEmptyCart;
-    TextView mDescriptionTxt, mNameTxt, mPriceTxt, mQtyText, mAvailability, mCartQtyTxt, mTotalAmountTxt;
+    TextView mDescriptionTxt, mNameTxt, mPriceTxt, mQtyText, mAvailability, mCartQtyTxt, mTotalAmountTxt, mReviews;
     String productID,productName, imageURL, productQty, userID;
     int productPrice;
     SharedPreferences totalPrefs, userPrefs, prefs;
@@ -52,6 +51,7 @@ public class ProductDisplay extends AppCompatActivity {
         mPriceTxt = findViewById(R.id.priceTxt); mAvailability = findViewById(R.id.availabilityTxt);
         numberButton = findViewById(R.id.addQtyBtn); mTotalAmountTxt = findViewById(R.id.totalMoneyTxt);
         mCartQtyTxt = findViewById(R.id.cartQty); mEmptyCart = findViewById(R.id.deleteIcon);
+        mReviews = findViewById(R.id.openChat);
 
         //sharepreferences
         totalPrefs = getSharedPreferences(CART_KEY, MODE_PRIVATE);
@@ -101,6 +101,17 @@ public class ProductDisplay extends AppCompatActivity {
                     saveData(productID, productName, prefs);
                     addTotalCart(cartTotalQty, productPrice, cartTotalAmount, userID);
                 }
+            }
+        });
+        //open review activity
+        mReviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent reviewActivity = new Intent(getApplicationContext(), TopicActivity.class);
+                reviewActivity.putExtra("productID",productID);
+                reviewActivity.putExtra("productName", productName);
+                reviewActivity.putExtra("imageURL",imageURL);
+                startActivity(reviewActivity);
             }
         });
 

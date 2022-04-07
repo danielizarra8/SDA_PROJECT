@@ -59,4 +59,7 @@ dependencies {
     implementation 'com.github.rey5137:material:1.3.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    //firebase ms
+    implementation 'com.google.firebase:firebase-messaging:23.0.2'
+
 }
